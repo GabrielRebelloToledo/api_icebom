@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="compensacao_financeira" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="DATAINI" class="java.sql.Timestamp">
+		<parameterDescription><![CDATA[Data Inicio]]></parameterDescription>
+	</parameter>
+	<parameter name="DATAFIM" class="java.sql.Timestamp">
+		<parameterDescription><![CDATA[Data Final]]></parameterDescription>
+	</parameter>
+	<parameter name="TIPO" class="java.lang.String">
+		<property name="NOMECAMPO" value="AD_CONTAPARCEIRO.TIPO"/>
+		<property name="TYPE" value="I"/>
+		<parameterDescription><![CDATA[Cliente/Fornecedor]]></parameterDescription>
+	</parameter>
+	<parameter name="CODCONTA" class="java.lang.String">
+		<property name="PESQUISA" value="TRUE"/>
+		<property name="NOMETABELA" value="AD_CONTAPARCEIRO"/>
+		<parameterDescription><![CDATA[Conta Parceiro]]></parameterDescription>
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+
+CTA.CODCONTA,
+EXT.NUFIN,
+EXT.DATABAIXA,
+EXT.VLRBAIXA,
+EXT.NUCOMPENS,
+EXT.NUMNOTA,
+PARC.NOMEPARC,
+Formatar_Cpf_Cnpj(PARC.CGC_CPF) AS CNPJ,
+
+TRUNC(FIN.DTVENC) AS VENCIMENTO,
+FIN.VLRDESDOB,
+FIN.VLRMULTA,
+FIN.VLRJURO,
+NVL((SELECT SUM(VLRBAIXA) AS SALDO_INICIAL FROM AD_EXTRATOPARCEIRO WHERE CODCONTA = CTA.CODCONTA AND DATABAIXA < $P{DATAINI}),0) AS SALDO
+
+
+
+FROM
+AD_EXTRATOPARCEIRO EXT
+INNER JOIN AD_CONTAPARCEIRO CTA ON EXT.CODCONTA = CTA.CODCONTA
+INNER JOIN TGFPAR PARC ON CTA.CODPARC = PARC.CODPARC
+INNER JOIN TGFFIN FIN ON EXT.NUFIN = FIN.NUFIN
+
+WHERE (CTA.CODCONTA = $P{CODCONTA} OR $P{CODCONTA} IS NULL)
+
+AND EXT.DATABAIXA >= $P{DATAINI} AND EXT.DATABAIXA <= $P{DATAFIM}
+
+AND CTA.TIPO = $P{TIPO}
+
+ORDER BY CTA.CODCONTA ASC,  EXT.DATABAIXA ASC]]>
+	</queryString>
+	<field name="CODCONTA" class="java.lang.String"/>
+	<field name="NUFIN" class="java.lang.String"/>
+	<field name="DATABAIXA" class="java.sql.Timestamp"/>
+	<field name="VLRBAIXA" class="java.math.BigDecimal"/>
+	<field name="NOMEPARC" class="java.lang.String"/>
+	<field name="CNPJ" class="java.lang.String"/>
+	<field name="VENCIMENTO" class="java.sql.Timestamp"/>
+	<field name="SALDO" class="java.math.BigDecimal"/>
+	<field name="NUCOMPENS" class="java.lang.String"/>
+	<field name="VLRDESDOB" class="java.math.BigDecimal"/>
+	<field name="VLRMULTA" class="java.math.BigDecimal"/>
+	<field name="VLRJURO" class="java.math.BigDecimal"/>
+	<field name="NUMNOTA" class="java.lang.String"/>
+	<variable name="SALDO_FINAL" class="java.math.BigDecimal" resetType="Group" resetGroup="conta_parceiro" calculation="Sum">
+		<variableExpression><![CDATA[$F{VLRBAIXA}
+]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="SALDO_INICIAL" class="java.math.BigDecimal" resetType="Group" resetGroup="conta_parceiro">
+		<variableExpression><![CDATA[$F{SALDO}]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<variable name="SUM_FINAL" class="java.math.BigDecimal" resetType="Group" resetGroup="conta_parceiro" calculation="Sum">
+		<variableExpression><![CDATA[$V{SALDO_INICIAL}.add($V{SALDO_FINAL})]]></variableExpression>
+		<initialValueExpression><![CDATA[new BigDecimal(0)]]></initialValueExpression>
+	</variable>
+	<group name="conta_parceiro">
+		<groupExpression><![CDATA[$F{CODCONTA}]]></groupExpression>
+		<groupHeader>
+			<band height="41">
+				<textField isStretchWithOverflow="true">
+					<reportElement x="3" y="0" width="600" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Conta: " + $F{CODCONTA} + " Parceiro : " + $F{NOMEPARC} + " - " + $F{CNPJ} ]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="702" y="0" width="100" height="20"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{SALDO}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="606" y="0" width="96" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Saldo Inicial]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="3" y="20" width="76" height="20"/>
+					<textElement/>
+					<text><![CDATA[Nro. Financeiro]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="79" y="20" width="83" height="20"/>
+					<textElement/>
+					<text><![CDATA[Data Baixa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="162" y="20" width="95" height="20"/>
+					<textElement/>
+					<text><![CDATA[Data Vencimento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="350" y="20" width="88" height="20"/>
+					<textElement/>
+					<text><![CDATA[Nro. Acerto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="438" y="20" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Vlr. Parcela]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="538" y="20" width="81" height="20"/>
+					<textElement/>
+					<text><![CDATA[Vlr. Juros]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="619" y="20" width="83" height="20"/>
+					<textElement/>
+					<text><![CDATA[Vlr. Multa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="702" y="20" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Vlr.Baixa]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="257" y="20" width="93" height="20"/>
+					<textElement/>
+					<text><![CDATA[Nota / Adt]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="32">
+				<textField pattern="#,##0.00">
+					<reportElement x="702" y="12" width="100" height="20"/>
+					<box leftPadding="2"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SALDO_FINAL}.add($V{SALDO_INICIAL})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="602" y="12" width="100" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Saldo Final]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="0" width="241" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Compensações Financeiras]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="3" y="0" width="76" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NUFIN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="0" width="88" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NUCOMPENS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="538" y="0" width="81" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{VLRJURO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="619" y="0" width="83" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{VLRMULTA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="702" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{VLRBAIXA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="79" y="0" width="83" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{DATABAIXA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="162" y="0" width="95" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{VENCIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="438" y="0" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{VLRDESDOB}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="257" y="0" width="93" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{NUMNOTA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
