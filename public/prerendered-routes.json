@@ -1,9 +1,11 @@
 {
   "routes": [
     "/",
-    "/companies",
-    "/departments",
+    "/cusuario",
+    "/fluxo",
     "/inicio",
-    "/view"
+    "/processos",
+    "/produtos",
+    "/status"
   ]
 }
