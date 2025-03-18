@@ -21,10 +21,13 @@ class ListProcessService {
         });
 
 
-        if (!list) { }
-        console.error("Não Encontrado", NOT_FOUND);
+        if (!list) {
+            console.error("Não Encontrado", NOT_FOUND);
+        }
         return list;
     }
+    //console.log(list)
+
 
 
 

@@ -23,8 +23,8 @@ const upload = multer({ storage });
 
 
 filesRoutes.post('/',
-    ensureAuthenticated,
-    ensureAuthorized([UserType.ADMIN, UserType.USER]),
+    /* ensureAuthenticated,
+    ensureAuthorized([UserType.ADMIN, UserType.USER]), */
     upload.single('arquivo'),
     FilesController.create);
 

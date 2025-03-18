@@ -60,21 +60,27 @@ export default new EntitySchema({
         },
         nronf: {
             type: 'text',
+            nullable:true
         },
         data: {
             type: 'datetime',
+            nullable:true
         },
         file1: {
             type: 'text',
+            nullable:true
         },
         file2: {
             type: 'text',
+            nullable:true
         },
         file3: {
             type: 'text',
+            nullable:true
         },
         file4: {
             type: 'text',
+            nullable:true
         },
         status: {
             type: 'int'
@@ -83,75 +89,98 @@ export default new EntitySchema({
         /* Novos */
         iteconforme: {
             type: 'boolean',
+            default: false,
         },
         diverconf: {
             type: 'boolean',
+            default: false,
         },
         obsconf: {
             type: 'text',
+            nullable:true
         },
         obsconf: {
             type: 'text',
+            nullable:true
         },
         checkrec: {
             type: 'boolean',
+            default: false,
         },
         obsrec: {
             type: 'text',
+            nullable:true
         },
         datarec: {
             type: 'datetime',
+            nullable:true
         },
         checkpast: {
             type: 'boolean',
+            default: false,
         },
         obspast: {
             type: 'text',
+            nullable:true
         },
         datapast: {
             type: 'datetime',
+            nullable:true
         },
         checkmat: {
             type: 'boolean',
+            nullable:true
         },
         obsmat: {
             type: 'text',
+            nullable:true
         },
         datamat: {
             type: 'datetime',
+            nullable:true
         },
         checkenv: {
             type: 'boolean',
+            default: false,
         },
         obsenv: {
             type: 'text',
+            nullable:true
         },
         dataenv: {
             type: 'datetime',
+            nullable:true
         },
         checkapont: {
             type: 'boolean',
+            default: false,
         },
         obsapont: {
             type: 'text',
         },
         dataapont: {
             type: 'datetime',
+            nullable:true
         },
         checklib: {
             type: 'boolean',
+            default: false,
         },
         obslib: {
             type: 'text',
+            nullable:true
         },
         infoprod: {
             type: 'text',
+            nullable:true
         },
         infonfs: {
             type: 'text',
+            nullable:true
         },
         infodevnfs: {
             type: 'text',
+            nullable:true
         },
         codusufin:{
             type: 'int',
