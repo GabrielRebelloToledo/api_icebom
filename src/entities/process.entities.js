@@ -25,9 +25,12 @@ export default new EntitySchema({
         },
         datapast: {
             type: 'date',
+            nullable: true
         },
         dataenvase: {
             type: 'date',
+            nullable: true
+            
         },
         statusProcess: {
             type: 'varchar',
