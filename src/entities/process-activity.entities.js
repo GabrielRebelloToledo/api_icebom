@@ -64,7 +64,7 @@ export default new EntitySchema({
         },
         data: {
            type: 'datetime',
-           
+           nullable: false,
             default: () => 'CURRENT_TIMESTAMP'
         },
         file1: {
@@ -150,7 +150,7 @@ export default new EntitySchema({
         },
         dataenv: {
             type: 'datetime',
-            
+            nullable: false,
             default: () => 'CURRENT_TIMESTAMP'
         },
         checkapont: {
