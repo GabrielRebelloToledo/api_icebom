@@ -92,18 +92,22 @@ export default new EntitySchema({
         iteconforme: {
             type: 'boolean',
             default: false,
+            nullable:true
         },
         diverconf: {
             type: 'boolean',
             default: false,
+            nullable:true
         },
         obsconf: {
             type: 'text',
             nullable:true
+            
         },
         checkrec: {
             type: 'boolean',
             default: false,
+            nullable:true
         },
         obsrec: {
             type: 'text',
@@ -111,25 +115,26 @@ export default new EntitySchema({
         },
         datarec: {
             type: 'date',
-             
             nullable: true,
         },
         checkpast: {
             type: 'boolean',
             default: false,
+            nullable:true
         },
         obspast: {
             type: 'text',
-            nullable:true
+            nullable:true,
+            
         },
         datapast: {
             type: 'date',
-            
             nullable: true,
         },
         checkmat: {
             type: 'boolean',
-            nullable:true
+            default: false,
+            nullable:true,
         },
         obsmat: {
             type: 'text',
@@ -143,6 +148,7 @@ export default new EntitySchema({
         checkenv: {
             type: 'boolean',
             default: false,
+            nullable:true,
         },
         obsenv: {
             type: 'text',
@@ -150,12 +156,12 @@ export default new EntitySchema({
         },
         dataenv: {
             type: 'date',
-            nullable: false,
             nullable: true,
         },
         checkapont: {
             type: 'boolean',
             default: false,
+            nullable:true,
         },
         obsapont: {
             type: 'text',
@@ -163,12 +169,12 @@ export default new EntitySchema({
         },
         dataapont: {
             type: 'date',
-            
             nullable: true,
         },
         checklib: {
             type: 'boolean',
             default: false,
+            nullable:true,
         },
         obslib: {
             type: 'text',
