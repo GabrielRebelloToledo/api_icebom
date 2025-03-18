@@ -62,7 +62,7 @@ export default new EntitySchema({
             type: 'text',
         },
         data: {
-            type: 'date',
+            type: 'datetime',
         },
         file1: {
             type: 'text',
@@ -100,7 +100,7 @@ export default new EntitySchema({
             type: 'text',
         },
         datarec: {
-            type: 'date',
+            type: 'datetime',
         },
         checkpast: {
             type: 'boolean',
@@ -109,7 +109,7 @@ export default new EntitySchema({
             type: 'text',
         },
         datapast: {
-            type: 'date',
+            type: 'datetime',
         },
         checkmat: {
             type: 'boolean',
@@ -118,7 +118,7 @@ export default new EntitySchema({
             type: 'text',
         },
         datamat: {
-            type: 'date',
+            type: 'datetime',
         },
         checkenv: {
             type: 'boolean',
@@ -127,7 +127,7 @@ export default new EntitySchema({
             type: 'text',
         },
         dataenv: {
-            type: 'date',
+            type: 'datetime',
         },
         checkapont: {
             type: 'boolean',
@@ -136,7 +136,7 @@ export default new EntitySchema({
             type: 'text',
         },
         dataapont: {
-            type: 'date',
+            type: 'datetime',
         },
         checklib: {
             type: 'boolean',

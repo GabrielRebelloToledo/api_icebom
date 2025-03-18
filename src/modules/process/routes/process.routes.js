@@ -11,7 +11,7 @@ processRoutes.post('/',
     ensureAuthorized([UserType.ADMIN, UserType.USER]),
     ProcessControllerController.create);
 
-processRoutes.get('/list',
+processRoutes.get('/list/:type',
     ensureAuthenticated,
     ensureAuthorized([UserType.ADMIN, UserType.USER]),
     ProcessControllerController.list);

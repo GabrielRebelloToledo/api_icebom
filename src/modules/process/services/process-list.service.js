@@ -10,15 +10,22 @@ class ListProcessService {
         this.processRepository = AppDataSource.getRepository(Process);
 
     }
-    async execute() {
-        const list = await this.processRepository.find({relations:['products']});
+    async execute(type) {
 
-        if (!list) {
-            throw new AppError(AppErrorTypes.users.notFound, NOT_FOUND);
-        }
-        //console.log(list)
+
+        const whereClause = type === '0' ? {} : { statusProcess: type };
+
+        const list = await this.processRepository.find({
+            relations: ['products'],
+            where: whereClause
+        });
+
+
+        if (!list) { }
+        console.error("Não Encontrado", NOT_FOUND);
         return list;
     }
+
 
 
 }

@@ -21,8 +21,9 @@ class ProcessController {
   }
 
   async list(request, response) {
+    
     const listProcessService = container.resolve(ProcessListService);
-    const list = await listProcessService.execute();
+    const list = await listProcessService.execute(request.params.type);
     return response.json(list);
   }
 
@@ -31,7 +32,7 @@ class ProcessController {
 
 
     //console.log("update")
-    console.log(request.user)
+    //console.log(request.user)
     const { id, projeto, datapast, dataenvase, statusProcess } = request.body;
     const updateProcess = container.resolve(ProcessUpdateService);
     const process = await updateProcess.execute({ id, projeto, datapast, dataenvase, statusProcess });
