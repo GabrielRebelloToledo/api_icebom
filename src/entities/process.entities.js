@@ -24,13 +24,13 @@ export default new EntitySchema({
             type: 'int',
         },
         datapast: {
-            type: 'date',
+            type: 'datetime',
             nullable: true
         },
         dataenvase: {
-            type: 'date',
+            type: 'datetime',
             nullable: true
-            
+
         },
         statusProcess: {
             type: 'varchar',
