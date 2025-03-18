@@ -65,7 +65,7 @@ export default new EntitySchema({
         data: {
            type: 'date',
             nullable:true,
-            default: () => 'CURRENT_TIMESTAMP'
+            default: () => 'CURRENT_DATE'
         },
         file1: {
             type: 'text',
@@ -96,10 +96,6 @@ export default new EntitySchema({
         diverconf: {
             type: 'boolean',
             default: false,
-        },
-        obsconf: {
-            type: 'text',
-            nullable:true
         },
         obsconf: {
             type: 'text',
