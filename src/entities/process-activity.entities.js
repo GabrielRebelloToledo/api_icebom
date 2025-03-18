@@ -63,7 +63,7 @@ export default new EntitySchema({
             nullable:true
         },
         data: {
-           type: 'datetime',
+           type: 'date',
            nullable: false,
             default: () => 'CURRENT_TIMESTAMP'
         },
@@ -110,7 +110,7 @@ export default new EntitySchema({
             nullable:true
         },
         datarec: {
-            type: 'datetime',
+            type: 'date',
              
             default: () => 'CURRENT_TIMESTAMP'
         },
@@ -123,7 +123,7 @@ export default new EntitySchema({
             nullable:true
         },
         datapast: {
-            type: 'datetime',
+            type: 'date',
             
             default: () => 'CURRENT_TIMESTAMP'
         },
@@ -136,7 +136,7 @@ export default new EntitySchema({
             nullable:true
         },
         datamat: {
-            type: 'datetime',
+            type: 'date',
              
             default: () => 'CURRENT_TIMESTAMP'
         },
@@ -149,7 +149,7 @@ export default new EntitySchema({
             nullable:true
         },
         dataenv: {
-            type: 'datetime',
+            type: 'date',
             nullable: false,
             default: () => 'CURRENT_TIMESTAMP'
         },
@@ -162,7 +162,7 @@ export default new EntitySchema({
             nullable:true
         },
         dataapont: {
-            type: 'datetime',
+            type: 'date',
             
             default: () => 'CURRENT_TIMESTAMP'
         },
