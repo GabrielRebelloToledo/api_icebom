@@ -64,7 +64,7 @@ export default new EntitySchema({
         },
         data: {
            type: 'date',
-            nullable:true,
+           
             default: () => 'CURRENT_TIMESTAMP'
         },
         file1: {
@@ -111,7 +111,7 @@ export default new EntitySchema({
         },
         datarec: {
             type: 'date',
-            nullable:true,
+             
             default: () => 'CURRENT_TIMESTAMP'
         },
         checkpast: {
@@ -124,7 +124,7 @@ export default new EntitySchema({
         },
         datapast: {
             type: 'date',
-            nullable:true,
+            
             default: () => 'CURRENT_TIMESTAMP'
         },
         checkmat: {
@@ -137,7 +137,7 @@ export default new EntitySchema({
         },
         datamat: {
             type: 'date',
-            nullable:true,
+             
             default: () => 'CURRENT_TIMESTAMP'
         },
         checkenv: {
@@ -150,7 +150,7 @@ export default new EntitySchema({
         },
         dataenv: {
             type: 'date',
-            nullable:true,
+            
             default: () => 'CURRENT_TIMESTAMP'
         },
         checkapont: {
@@ -163,7 +163,7 @@ export default new EntitySchema({
         },
         dataapont: {
             type: 'date',
-            nullable:true,
+            
             default: () => 'CURRENT_TIMESTAMP'
         },
         checklib: {
