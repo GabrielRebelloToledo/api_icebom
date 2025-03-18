@@ -63,8 +63,8 @@ export default new EntitySchema({
             nullable:true
         },
         data: {
-            type: 'datetime',
-            nullable:true
+           type: 'date',
+            nullable:true,
         },
         file1: {
             type: 'text',
@@ -113,7 +113,7 @@ export default new EntitySchema({
             nullable:true
         },
         datarec: {
-            type: 'datetime',
+            type: 'date',
             nullable:true
         },
         checkpast: {
@@ -125,7 +125,7 @@ export default new EntitySchema({
             nullable:true
         },
         datapast: {
-            type: 'datetime',
+            type: 'date',
             nullable:true
         },
         checkmat: {
@@ -137,7 +137,7 @@ export default new EntitySchema({
             nullable:true
         },
         datamat: {
-            type: 'datetime',
+            type: 'date',
             nullable:true
         },
         checkenv: {
@@ -149,7 +149,7 @@ export default new EntitySchema({
             nullable:true
         },
         dataenv: {
-            type: 'datetime',
+            type: 'date',
             nullable:true
         },
         checkapont: {
@@ -161,7 +161,7 @@ export default new EntitySchema({
             nullable:true
         },
         dataapont: {
-            type: 'datetime',
+            type: 'date',
             nullable:true
         },
         checklib: {

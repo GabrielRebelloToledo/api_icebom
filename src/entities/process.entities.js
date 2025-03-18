@@ -24,10 +24,10 @@ export default new EntitySchema({
             type: 'int',
         },
         datapast: {
-            type: 'datetime',
+            type: 'date',
         },
         dataenvase: {
-            type: 'datetime',
+            type: 'date',
         },
         statusProcess: {
             type: 'varchar',
