@@ -83,7 +83,8 @@ export default new EntitySchema({
             nullable:true
         },
         status: {
-            type: 'int'
+            type: 'int',
+            nullable:true
         },
 
         /* Novos */
@@ -157,6 +158,7 @@ export default new EntitySchema({
         },
         obsapont: {
             type: 'text',
+            nullable:true
         },
         dataapont: {
             type: 'datetime',
