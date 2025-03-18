@@ -23,6 +23,12 @@ class CreateProcessActivityService {
  
     const show = await showProcessActivityService.execute(body.idProcess, body.idStep);
 
+    for (let key in body) {
+      if (body[key] === '') {
+        body[key] = null;
+      }
+    }
+
     if (show) {
       //fazendo o update se já existir
       const process = await this.ProcessActivityRepository.save(body);
