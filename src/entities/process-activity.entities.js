@@ -85,6 +85,7 @@ export default new EntitySchema({
         },
         status: {
             type: 'int',
+            nullable:true,
             default:5
         },
 
