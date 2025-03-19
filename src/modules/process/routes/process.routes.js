@@ -21,4 +21,9 @@ processRoutes.post('/update',
     ensureAuthorized([UserType.ADMIN, UserType.USER]),
     ProcessControllerController.update);
 
+processRoutes.delete('/delete/:id',
+    ensureAuthenticated,
+    ensureAuthorized([UserType.ADMIN, UserType.USER]),
+    ProcessControllerController.delete);
+
 export default processRoutes;

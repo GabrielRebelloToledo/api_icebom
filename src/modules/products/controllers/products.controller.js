@@ -57,7 +57,7 @@ class ProductsController {
 
   async delete(request, response) {
 
-    console.log("Cheguei aqui")
+    //console.log("Cheguei aqui")
 
     const id = request.params.id;
     const deleteProductService = container.resolve(DeleteProductService);
@@ -65,7 +65,7 @@ class ProductsController {
     const products = await deleteProductService.execute(id);
 
 
-    console.log(products)
+    //console.log(products)
 
 
     /* if (products.success) {

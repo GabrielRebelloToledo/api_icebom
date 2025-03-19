@@ -5,6 +5,8 @@ import { BAD_REQUEST, CREATED } from '../../../shared/infra/constants/http-statu
 import ProcessCreateService from '../services/process-create.service.js';
 import ProcessListService from '../services/process-list.service.js';
 import ProcessUpdateService from '../services/process-update.service.js';
+import ProcessDeleteService from '../services/process-delete.service.js';
+
 class ProcessController {
 
   async create(request, response) {
@@ -21,7 +23,7 @@ class ProcessController {
   }
 
   async list(request, response) {
-    
+
     const listProcessService = container.resolve(ProcessListService);
     const list = await listProcessService.execute(request.params.type);
     return response.json(list);
@@ -42,6 +44,21 @@ class ProcessController {
     }
 
     return response.status(CREATED).json();
+  }
+
+  async delete(request, response) {
+
+    console.log(request.params);
+
+    const id = request.params.id;
+    const deleteProcessService = container.resolve(ProcessDeleteService);
+
+    const process = await deleteProcessService.execute(id);
+
+    if (process && process.success === false) {
+      return response.status(BAD_REQUEST).json({ message: process.message });
+    }
+    return response.status(200).json();
   }
 
 }

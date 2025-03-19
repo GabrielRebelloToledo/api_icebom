@@ -4,14 +4,34 @@ import path from 'path';
 import fs from 'fs';
 
 class FilesController {
+    /*    async create(request, response) {
+    
+            console.log(request.file);
+            const filePath = request.file.path;
+            console.log("filePath");
+            console.log(filePath);
+    
+            console.log(request.file);
+    
+            response.json({ message: 'Upload realizado com sucesso', path: request.file });
+        }  */
+
     async create(request, response) {
+        try {
+            if (!request.file) {
+                return response.status(400).json({ message: 'Nenhum arquivo enviado' });
+            }
 
-        console.log(request.file);
-        const filePath = request.file.path;
-        console.log(filePath);
+            console.log("Arquivo recebido:", request.file);
 
-        response.json({ message: 'Upload realizado com sucesso', path: request.file });
+            const filePath = request.file.path;
+            response.status(201).json({ message: 'Upload realizado com sucesso', path: request.file });
+        } catch (error) {
+            console.error("Erro no upload:", error);
+            response.status(500).json({ message: 'Erro ao realizar upload', error: error.message });
+        }
     }
+
 
     async delete(request, response) {
 
@@ -28,7 +48,7 @@ class FilesController {
                     response.status(500).json({ error: 'Erro ao excluir arquivo' });
                 } else {
 
-                    
+
                     console.log('Arquivo excluído com sucesso');
                     response.status(200).json({ message: 'Arquivo excluído com sucesso' });
                 }
