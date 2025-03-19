@@ -64,18 +64,10 @@ class ProductsController {
 
     const products = await deleteProductService.execute(id);
 
-
-    //console.log(products)
-
-
-    /* if (products.success) {
-      
-      return response.json(products);
+    if (products && products.success === false) {
+      return response.status(BAD_REQUEST).json({ message: products.message });
     }
-    
-    return response.status(400).json({ products }); */
-    // Retorna a resposta corretamente
-
+    return response.status(200).json();
   }
 }
 
