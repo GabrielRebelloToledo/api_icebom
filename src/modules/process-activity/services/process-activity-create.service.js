@@ -79,15 +79,13 @@ class CreateProcessActivityService {
       await this.updateCodUsu(id, idProcess, idStep);
     } else {
 
-      console.log("Validando status")
-      console.log(status)
       let statusUpdate = 5;
-
-      if (status != '' || status != null) {
+      if (status !== '' && status !== null) {
         statusUpdate = status;
       }
-      console.log(statusUpdate)
-      const uptStep = await this.StepProcessRepository.update(idStep, { status: 5 })
+
+
+      const uptStep = await this.StepProcessRepository.update(idStep, { status: statusUpdate })
     }
   }
 
