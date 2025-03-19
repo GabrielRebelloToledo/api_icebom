@@ -20,7 +20,7 @@ class CreateProcessActivityService {
   }
 
   async execute(body, id) {
- 
+
     const show = await showProcessActivityService.execute(body.idProcess, body.idStep);
 
     for (let key in body) {
@@ -32,7 +32,7 @@ class CreateProcessActivityService {
     if (show) {
       //fazendo o update se já existir
       const process = await this.ProcessActivityRepository.save(body);
-      
+
 
       if (process.idStep != null && process.idProcess != null) {
 
@@ -55,13 +55,13 @@ class CreateProcessActivityService {
 
 
       if (process.idStep != null && process.idProcess != null) {
-     
+
 
         this.updateStatus(process.status, process.idProcess, process.idStep, id);
 
         return { success: true, message: "Atividade Criada" }
       } else {
-  
+
         return { success: false, message: "Id do processo não encontrado!" }
       }
     }
@@ -78,7 +78,13 @@ class CreateProcessActivityService {
       await this.updateDateStart(idProcess, idStep);
       await this.updateCodUsu(id, idProcess, idStep);
     } else {
-      const uptStep = await this.StepProcessRepository.update(idStep, { status: status })
+
+      let statusUpdate = 5;
+
+      if (status != '' || status != null) {
+        statusUpdate = status;
+      }
+      const uptStep = await this.StepProcessRepository.update(idStep, { status: 5 })
     }
   }
 
