@@ -35,6 +35,7 @@ export default new EntitySchema({
         },
         status: {
             type: 'int',
+            default:5
         },
         description: {
             type: 'varchar',
