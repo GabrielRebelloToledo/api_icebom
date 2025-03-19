@@ -1,0 +1,11 @@
+{
+  "routes": [
+    "/",
+    "/cusuario",
+    "/fluxo",
+    "/inicio",
+    "/processos",
+    "/produtos",
+    "/status"
+  ]
+}
