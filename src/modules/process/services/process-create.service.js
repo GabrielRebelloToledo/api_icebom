@@ -22,7 +22,8 @@ class CreateFlowService {
     });
     const order = ultimoItem ? ultimoItem.order + 1 : 1;
 
-    qtdcalda = (qtdcalda ?? '0').toString().replace(',', '.');
+    console.log(qtdcalda);
+    qtdcalda = qtdcalda.toString().replace(',', '.');
 
     const processcreate = this.ProcessRepository.create({ projeto, datapast, dataenvase, statusProcess, order, idtype, qtdcalda });
 
