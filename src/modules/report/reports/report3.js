@@ -27,7 +27,13 @@ import 'dotenv/config';
           ],
           margin: [0, 0, 0, 5]
         },
-        
+        {
+          columns: [
+            { width: 'auto', text: 'Quantidade de Pallets:', bold: true },
+            { width: '*', text: dados.qtdpallets }
+          ],
+          margin: [0, 0, 0, 5]
+        },
         {
           columns: [
             { width: 'auto', text: 'Status:', bold: true },
