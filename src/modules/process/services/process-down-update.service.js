@@ -27,7 +27,7 @@ class UpdateService {
 
         // troca as ordens
         const ordemAtual = item.order;
-        item.order = itemAbaixo.order;
+        item.order = itemAbaixo.order ?? item.order;
         itemAbaixo.order = ordemAtual;
 
 
