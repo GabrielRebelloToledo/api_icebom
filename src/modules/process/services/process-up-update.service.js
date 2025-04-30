@@ -22,7 +22,7 @@ class UpdateService {
         });
 
         if (!itemAbaixo) {
-            throw new Error("Esse item já está na base da hierarquia");
+            console.error("Esse item já está no topo da hierarquia");
         }
         // troca as ordens
        const ordemAtual = item.order;
