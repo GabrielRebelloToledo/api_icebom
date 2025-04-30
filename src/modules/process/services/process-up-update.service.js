@@ -21,10 +21,9 @@ class UpdateService {
             where: { order: item.order - 1 }
         });
 
-        /* if (!itemAbaixo) {
+        if (!itemAbaixo) {
             throw new Error("Esse item já está na base da hierarquia");
         }
- */
         // troca as ordens
        const ordemAtual = item.order;
         item.order = itemAbaixo.order ?? item.order;
