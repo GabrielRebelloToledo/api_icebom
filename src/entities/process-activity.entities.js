@@ -7,7 +7,7 @@ export class ProcessActivity {
         iteconforme, diverconf, obsconf, checkrec, obsrec, datarec, 
         checkpast, obspast, datapast, checkmat, obsmat, datamat, 
         checkenv, obsenv, dataenv, checkapont, obsapont, dataapont, 
-        checklib, obslib, infoprod, infonfs, infodevnfs, codusufin
+        checklib, obslib, infoprod, infonfs, infodevnfs, codusufin, qtdpallets
     ) {
         this.idStep = idStep;
         this.idProcess = idProcess;
@@ -42,6 +42,7 @@ export class ProcessActivity {
         this.infonfs = infonfs;
         this.infodevnfs = infodevnfs;
         this.codusufin = codusufin;
+        this.qtdpallets = qtdpallets;
     }
 }
 
@@ -63,7 +64,7 @@ export default new EntitySchema({
             nullable:true
         },
         data: {
-           type: 'date',
+           type: 'datetime',
            nullable: true,
              
         },
@@ -115,7 +116,7 @@ export default new EntitySchema({
             nullable:true
         },
         datarec: {
-            type: 'date',
+            type: 'datetime',
             nullable: true,
         },
         checkpast: {
@@ -129,7 +130,7 @@ export default new EntitySchema({
             
         },
         datapast: {
-            type: 'date',
+            type: 'datetime',
             nullable: true,
         },
         checkmat: {
@@ -142,7 +143,7 @@ export default new EntitySchema({
             nullable:true
         },
         datamat: {
-            type: 'date',
+            type: 'datetime',
              
             nullable: true,
         },
@@ -156,7 +157,7 @@ export default new EntitySchema({
             nullable:true
         },
         dataenv: {
-            type: 'date',
+            type: 'datetime',
             nullable: true,
         },
         checkapont: {
@@ -169,7 +170,7 @@ export default new EntitySchema({
             nullable:true
         },
         dataapont: {
-            type: 'date',
+            type: 'datetime',
             nullable: true,
         },
         checklib: {
@@ -194,6 +195,10 @@ export default new EntitySchema({
             nullable:true
         },
         codusufin:{
+            type: 'int',
+            nullable:true
+        },
+        qtdpallets:{
             type: 'int',
             nullable:true
         }

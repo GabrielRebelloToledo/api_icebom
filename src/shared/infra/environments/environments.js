@@ -14,6 +14,7 @@ const AppDataSource = new DataSource({
     database: process.env.DB_NAME,
     synchronize: true, //rodar criação de tabela automatica
     logging: false,
+    timezone: 'Z',
     entities: ["src/entities/*{.js,.ts}"],
     migrations: ["src/migrations/*{.js,.ts}"], // Caminho para suas migrations
     cli: {

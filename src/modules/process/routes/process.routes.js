@@ -16,10 +16,32 @@ processRoutes.get('/list/:type',
     ensureAuthorized([UserType.ADMIN, UserType.USER]),
     ProcessControllerController.list);
 
+processRoutes.get('/listresumo/:type',
+        ensureAuthenticated,
+        ensureAuthorized([UserType.ADMIN, UserType.USER]),
+        ProcessControllerController.listResumo);
+
+processRoutes.get('/listresumosum/:type',
+        ensureAuthenticated,
+        ensureAuthorized([UserType.ADMIN, UserType.USER]),
+        ProcessControllerController.listResumoSum);
+
+        
+
 processRoutes.post('/update',
     ensureAuthenticated,
     ensureAuthorized([UserType.ADMIN, UserType.USER]),
     ProcessControllerController.update);
+
+processRoutes.post('/update/up/:id',
+   /*  ensureAuthenticated,
+    ensureAuthorized([UserType.ADMIN, UserType.USER]), */
+    ProcessControllerController.upHierarquia);
+
+processRoutes.post('/update/down/:id',
+    /* ensureAuthenticated,
+    ensureAuthorized([UserType.ADMIN, UserType.USER]), */
+    ProcessControllerController.downHierarquia);
 
 processRoutes.delete('/delete/:id',
     ensureAuthenticated,

@@ -1,35 +1,32 @@
 import AppDataSource from '../../../shared/infra/environments/environments.js';  // Importa a conexão do banco
 import AppError from '../../../shared/errors/app-error.js'; // Classe personalizada de erro
-import Process from '../../../entities/process.entities.js';  // Sua entidade de usuário
 import AppErrorTypes from '../../../shared/errors/app-error-types.js';
 import { NOT_FOUND } from '../../../shared/infra/constants/http-status-code.constants.js';
 
 class ListProcessService {
-    constructor() {
-        // Repositório do TypeORM para a entidade User
-        this.processRepository = AppDataSource.getRepository(Process);
-
-    }
+    constructor() {}
     async execute(type) {
 
-
-        const whereClause = type === '0' ? {} : { statusProcess: type };
-
-        const list = await this.processRepository.find({
-            relations: ['products'],
-            where: whereClause,
-            order: {
-                order: 'ASC'   
-            }
-        });
-
+        const list = await AppDataSource.query('SELECT * FROM processoresumo');
 
         if (!list) {
             console.error("Não Encontrado", NOT_FOUND);
         }
+        console.log(list)
         return list;
     }
-    //console.log(list)
+
+    async executeSum(type) {
+
+        const list = await AppDataSource.query('SELECT * FROM processoresumosoma');
+
+        if (!list) {
+            console.error("Não Encontrado", NOT_FOUND);
+        }
+        console.log(list)
+        return list;
+    }
+  
 
 
 

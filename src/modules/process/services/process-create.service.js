@@ -13,9 +13,16 @@ class CreateFlowService {
     this.StepProcessRepository = AppDataSource.getRepository(StepsProcess);
   }
 
-  async execute({ projeto, datapast, dataenvase, statusProcess }) {
+  async execute({ projeto, datapast, dataenvase, statusProcess, idtype, qtdcalda }) {
 
-    const processcreate = this.ProcessRepository.create({ projeto, datapast, dataenvase, statusProcess });
+    qtdcalda = qtdcalda.replace(',', '.');
+    const ultimoItem = await this.ProcessRepository.findOne({
+      where: {},
+      order: { order: 'DESC' }
+    });
+    const order = ultimoItem ? ultimoItem.order + 1 : 1;
+
+    const processcreate = this.ProcessRepository.create({ projeto, datapast, dataenvase, statusProcess, order, idtype, qtdcalda });
 
     if (!processcreate) {
       return { success: false, message: "Processo não criado!" }
@@ -23,6 +30,8 @@ class CreateFlowService {
 
     // Salvar no banco
     const process = await this.ProcessRepository.save(processcreate);
+
+    this.reorganizarOrdem();
 
     //console.log(process.id)
 
@@ -61,7 +70,18 @@ class CreateFlowService {
   }
 
 
+  async reorganizarOrdem() {
+    const itens = await this.ProcessRepository.find({
+      order: { order: 'ASC' }
+    });
 
+    let novaOrdem = 1;
+    for (const item of itens) {
+      item.order = novaOrdem++;
+    }
+
+    await this.ProcessRepository.save(itens);
+  }
 
 }
 

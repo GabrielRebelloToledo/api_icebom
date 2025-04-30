@@ -61,6 +61,8 @@ class FilesController {
 
     async show(request, response) {
 
+        console.log("Chequei aqui")
+
         const { fileName } = request.params;
 
         const filePath = path.resolve('src/modules/files', 'uploads', fileName);
@@ -76,6 +78,47 @@ class FilesController {
         } else {
             return response.status(404).json({ error: 'Arquivo não encontrado' });
         }
+
+    }
+
+    async showReport(request, response) {
+
+        const { fileName } = request.params;
+
+        const filePath = path.resolve('src/modules/files', 'uploads', fileName);
+
+        if (!fs.existsSync(filePath)) {
+            return response.status(404).json({ error: 'Arquivo não encontrado' });
+        }
+
+        const ext = path.extname(fileName).toLowerCase();
+
+        if (ext === '.pdf') {
+            response.setHeader('Content-Type', 'application/pdf');
+            response.setHeader('Content-Disposition', `inline; filename="${fileName}"`);
+            return response.sendFile(filePath);
+        } else {
+            return response.download(filePath, fileName, (err) => {
+                if (err) {
+                    console.error('Erro no download:', err);
+                    response.status(500).json({ error: 'Erro ao baixar o arquivo' });
+                }
+            });
+        }
+
+        /* if (fs.existsSync(filePath)) {
+            const fileName = path.basename(filePath);
+            return response.download(filePath, fileName, (err) => {
+                if (err) {
+                    console.error('Erro no download:', err);
+                    response.status(500).json({ error: 'Erro ao baixar o arquivo' });
+                }
+            });
+        } else {
+            return response.status(404).json({ error: 'Arquivo não encontrado' });
+        } */
+
+
 
     }
 

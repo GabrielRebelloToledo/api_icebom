@@ -79,13 +79,32 @@ class DeleteProcessService {
                 await this.StepsProcessRepository.remove(step);
             }
 
+            this.reorganizarOrdem();
+            
             return true;
+
+            
 
         } catch (error) {
             console.error("Erro ao excluir steps:", error);
             return false;
         }
     }
+
+
+    async reorganizarOrdem() {
+        const itens = await this.ProcessRepository.find({
+            order: { order: 'ASC' }
+        });
+    
+        let novaOrdem = 1;
+        for (const item of itens) {
+            item.order = novaOrdem++;
+        }
+    
+        await this.ProcessRepository.save(itens);
+    }
+    
 }
 
 export default DeleteProcessService;

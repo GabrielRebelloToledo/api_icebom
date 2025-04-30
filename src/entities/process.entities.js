@@ -2,11 +2,13 @@ import { EntitySchema } from 'typeorm';
 
 
 export class Process {
-    constructor(id, projeto,datapast,dataenvase) {
+    constructor(id, projeto, datapast, dataenvase, qtdcalda, idtype) {
         this.id = id;
         this.projeto = projeto;
         this.datapast = datapast;
         this.dataenvase = dataenvase;
+        this.qtdcalda = qtdcalda;
+        this.idtype = idtype;
     }
 }
 
@@ -30,10 +32,22 @@ export default new EntitySchema({
         dataenvase: {
             type: 'datetime',
             nullable: true
-
         },
         statusProcess: {
             type: 'varchar',
+        },
+        qtdcalda: {
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+            nullable: true
+        },
+        idtype: {
+            type: 'int',
+            default: 1
+        },
+        order: {
+            type: 'int',
         }
     },
     relations: {

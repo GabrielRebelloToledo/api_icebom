@@ -11,10 +11,12 @@ class UpdateService {
         this.ProcessRepository = AppDataSource.getRepository(Process);
     }
 
-    async execute({ id, projeto, datapast, dataenvase, statusProcess }) {
+    async execute({ id, projeto, datapast, dataenvase, statusProcess, idtype, qtdcalda }) {
+
+        qtdcalda = qtdcalda.replace(',','.');
 
         // Salvar no banco
-        const process = await this.ProcessRepository.save({ id, projeto, datapast, dataenvase, statusProcess });
+        const process = await this.ProcessRepository.save({ id, projeto, datapast, dataenvase, statusProcess, idtype, qtdcalda });
 
 
         if (!process) {

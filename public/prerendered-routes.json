@@ -3,9 +3,11 @@
     "/",
     "/cusuario",
     "/fluxo",
+    "/fluxo-resumido",
     "/inicio",
     "/processos",
     "/produtos",
-    "/status"
+    "/status",
+    "/tipo-produto"
   ]
 }

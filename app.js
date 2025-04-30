@@ -13,8 +13,8 @@ import uploadRoutes from './src/modules/files/routes/files.routes.js';
 import stepform from './src/modules/forms/routes/forms.routes.js';
 import processActivityRoutes from './src/modules/process-activity/routes/process-activity.routes.js';
 import statusRoutes from './src/modules/status/routes/status.routes.js';
-
-
+import reportsRoutes from './src/modules/report/router/report.routes.js';
+import typeRoutes from './src/modules/typeproducts/routes/type.routes.js';
 
 import corsConfig from './src/config/cors.config.js';
 import cors from 'cors';
@@ -49,6 +49,8 @@ app.use('/upload',uploadRoutes);
 app.use('/stepform',stepform);
 app.use('/activity',processActivityRoutes);
 app.use('/status',statusRoutes);
+app.use('/report',reportsRoutes);
+app.use('/type',typeRoutes);
 // Inicializar o banco de dados
 initializeDatabase();
 // Iniciar o servidor

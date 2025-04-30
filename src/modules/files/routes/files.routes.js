@@ -41,4 +41,8 @@ filesRoutes.get('/show/:fileName',
     ensureAuthorized([UserType.ADMIN, UserType.USER]),
     FilesController.show);
 
+
+filesRoutes.get('/show/intern/:fileName',
+        FilesController.showReport);
+
 export default filesRoutes;
