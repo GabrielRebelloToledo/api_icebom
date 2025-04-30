@@ -15,12 +15,14 @@ class CreateFlowService {
 
   async execute({ projeto, datapast, dataenvase, statusProcess, idtype, qtdcalda }) {
 
-    qtdcalda = qtdcalda.replace(',', '.');
+    
     const ultimoItem = await this.ProcessRepository.findOne({
       where: {},
       order: { order: 'DESC' }
     });
     const order = ultimoItem ? ultimoItem.order + 1 : 1;
+
+    qtdcalda = (qtdcalda ?? '0').toString().replace(',', '.');
 
     const processcreate = this.ProcessRepository.create({ projeto, datapast, dataenvase, statusProcess, order, idtype, qtdcalda });
 
