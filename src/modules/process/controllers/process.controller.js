@@ -15,9 +15,9 @@ class ProcessController {
 
   async create(request, response) {
     
-    const { projeto, datapast, dataenvase, statusProcess } = request.body;
+    const { projeto, datapast, dataenvase, statusProcess,idtype, qtdcalda } = request.body;
     const createProcess = container.resolve(ProcessCreateService);
-    const process = await createProcess.execute({ projeto, datapast, dataenvase, statusProcess });
+    const process = await createProcess.execute({ projeto, datapast, dataenvase, statusProcess,idtype, qtdcalda });
 
     if (process && process.success === false) {
       return response.status(BAD_REQUEST).json({ message: process.message });
