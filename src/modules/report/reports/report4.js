@@ -158,11 +158,10 @@ import 'dotenv/config';
   
         { text: 'Anexos', style: 'subheader', margin: [0, 0, 0, 10] },
   
-        dados.file1 && { text: 'Arquivo 1', link: `http://localhost:${process.env.PORT}/upload/show/intern/${dados.file1}`, linkTarget: '_blank', style: 'link' },
-      dados.file2 && { text: 'Arquivo 2', link: `http://localhost:${process.env.PORT}/upload/show/intern/${dados.file2}`, linkTarget: '_blank', style: 'link' },
-      dados.file3 && { text: 'Arquivo 3', link: `http://localhost:${process.env.PORT}/upload/show/intern/${dados.file3}`, linkTarget: '_blank', style: 'link' },
-      dados.file4 && { text: 'Arquivo 4', link: `http://localhost:${process.env.PORT}/upload/show/intern/${dados.file4}`, linkTarget: '_blank', style: 'link' },
-  
+        dados.file1 && { text: 'Arquivo 1', link: `http://${process.env.DB_HOST}:${process.env.PORT}/upload/show/intern/${dados.file1}`, linkTarget: '_blank', style: 'link' },
+        dados.file2 && { text: 'Arquivo 2', link: `http://${process.env.DB_HOST}:${process.env.PORT}/upload/show/intern/${dados.file2}`, linkTarget: '_blank', style: 'link' },
+        dados.file3 && { text: 'Arquivo 3', link: `http://${process.env.DB_HOST}:${process.env.PORT}/upload/show/intern/${dados.file3}`, linkTarget: '_blank', style: 'link' },
+        dados.file4 && { text: 'Arquivo 4', link: `http://${process.env.DB_HOST}:${process.env.PORT}/upload/show/intern/${dados.file4}`, linkTarget: '_blank', style: 'link' },
       ].filter(Boolean),
   
       styles: {
