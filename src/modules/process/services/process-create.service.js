@@ -22,6 +22,7 @@ class CreateFlowService {
     });
     const order = ultimoItem ? ultimoItem.order + 1 : 1;
 
+    console.log(idtype);
     console.log(qtdcalda);
     qtdcalda = qtdcalda.replace(',', '.');
 
