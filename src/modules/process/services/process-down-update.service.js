@@ -32,14 +32,29 @@ class UpdateService {
         itemAbaixo.order = ordemAtual;
 
 
-       /*  console.log("Item")
-        console.log(item)
-        console.log("itemAbaixo")
-        console.log(itemAbaixo) */
+        /*  console.log("Item")
+         console.log(item)
+         console.log("itemAbaixo")
+         console.log(itemAbaixo) */
 
         // salva as alterações
         await this.ProcessRepository.save([item, itemAbaixo]);
 
+        this.reorganizarOrdem();
+    }
+
+
+    async reorganizarOrdem() {
+        const itens = await this.ProcessRepository.find({
+            order: { order: 'ASC' }
+        });
+
+        let novaOrdem = 1;
+        for (const item of itens) {
+            item.order = novaOrdem++;
+        }
+
+        await this.ProcessRepository.save(itens);
     }
 
 }
