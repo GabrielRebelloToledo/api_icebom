@@ -23,6 +23,7 @@ class UpdateService {
 
         if (!itemAbaixo) {
             console.error("Esse item já está na base da hierarquia");
+            return;
         }
 
         // troca as ordens

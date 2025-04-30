@@ -23,9 +23,10 @@ class UpdateService {
 
         if (!itemAbaixo) {
             console.error("Esse item já está no topo da hierarquia");
+            return;
         }
         // troca as ordens
-       const ordemAtual = item.order;
+        const ordemAtual = item.order;
         item.order = itemAbaixo.order ?? item.order;
         itemAbaixo.order = ordemAtual;
 
