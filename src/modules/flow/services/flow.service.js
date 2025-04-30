@@ -10,7 +10,9 @@ class ListFlowService {
   }
 
   async execute() {
-    const flow = await this.flowRepository.find({ where: { statusProcess: 'A' }, relations: ['steps', 'products', 'steps.status'] });
+    const flow = await this.flowRepository.find({ where: { statusProcess: 'A' }, relations: ['steps', 'products', 'steps.status'], order: {
+      order: 'ASC'   
+  } });
 
     /* console.log(flow) */
 
