@@ -42,6 +42,23 @@ export default new EntitySchema({
             scale: 2,
             nullable: true
         },
+        qtdcaixas: {
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+            nullable: true
+        },
+        qtdunidades: {
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
+            nullable: true
+        },
+        onlyprocessresum: {
+            type: 'varchar',
+            default: 'S'
+        },
+
         idtype: {
             type: 'int',
             default: 1

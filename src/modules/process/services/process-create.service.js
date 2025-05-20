@@ -13,7 +13,7 @@ class CreateFlowService {
     this.StepProcessRepository = AppDataSource.getRepository(StepsProcess);
   }
 
-  async execute({ projeto, datapast, dataenvase, statusProcess, idtype, qtdcalda }) {
+  async execute({ projeto, datapast, dataenvase, statusProcess, idtype, qtdcalda, qtdcaixas, qtdunidades }) {
 
     
     const ultimoItem = await this.ProcessRepository.findOne({
@@ -24,7 +24,7 @@ class CreateFlowService {
 
     qtdcalda = qtdcalda.replace(',', '.');
 
-    const processcreate = this.ProcessRepository.create({ projeto, datapast, dataenvase, statusProcess, order, idtype, qtdcalda });
+    const processcreate = this.ProcessRepository.create({ projeto, datapast, dataenvase, statusProcess, order, idtype, qtdcalda, qtdcaixas, qtdunidades });
 
     if (!processcreate) {
       return { success: false, message: "Processo não criado!" }

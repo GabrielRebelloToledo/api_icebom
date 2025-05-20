@@ -74,6 +74,8 @@ export const relatorio2 = (processShow) => {
       dados.file2 && { text: 'Arquivo 2', link: `http://${process.env.DB_HOST}:${process.env.PORT}/upload/show/intern/${dados.file2}`, linkTarget: '_blank', style: 'link' },
       dados.file3 && { text: 'Arquivo 3', link: `http://${process.env.DB_HOST}:${process.env.PORT}/upload/show/intern/${dados.file3}`, linkTarget: '_blank', style: 'link' },
       dados.file4 && { text: 'Arquivo 4', link: `http://${process.env.DB_HOST}:${process.env.PORT}/upload/show/intern/${dados.file4}`, linkTarget: '_blank', style: 'link' },
+      dados.file5 && { text: 'Arquivo 5', link: `http://${process.env.DB_HOST}:${process.env.PORT}/upload/show/intern/${dados.file5}`, linkTarget: '_blank', style: 'link' },
+      dados.file6 && { text: 'Arquivo 6', link: `http://${process.env.DB_HOST}:${process.env.PORT}/upload/show/intern/${dados.file6}`, linkTarget: '_blank', style: 'link' },
     ].filter(Boolean),
 
     styles: {

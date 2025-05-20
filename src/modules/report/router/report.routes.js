@@ -11,4 +11,9 @@ const reportsRoutes = express.Router();
     ensureAuthorized([UserType.ADMIN, UserType.USER]), */
     ReportController.show);
 
+    reportsRoutes.get('/show/:processId/:nome',
+    /* ensureAuthenticated,
+    ensureAuthorized([UserType.ADMIN, UserType.USER]), */
+    ReportController.showAll);
+
 export default reportsRoutes;

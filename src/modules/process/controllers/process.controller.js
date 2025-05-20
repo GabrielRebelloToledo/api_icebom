@@ -15,9 +15,9 @@ class ProcessController {
 
   async create(request, response) {
     
-    const { projeto, datapast, dataenvase, statusProcess,idtype, qtdcalda } = request.body;
+    const { projeto, datapast, dataenvase, statusProcess,idtype, qtdcalda, qtdcaixas, qtdunidades, onlyprocessresum } = request.body;
     const createProcess = container.resolve(ProcessCreateService);
-    const process = await createProcess.execute({ projeto, datapast, dataenvase, statusProcess,idtype, qtdcalda });
+    const process = await createProcess.execute({ projeto, datapast, dataenvase, statusProcess,idtype, qtdcalda, qtdcaixas, qtdunidades, onlyprocessresum });
 
     if (process && process.success === false) {
       return response.status(BAD_REQUEST).json({ message: process.message });
@@ -52,9 +52,9 @@ class ProcessController {
 
     //console.log("update")
     //console.log(request.user)
-    const { id, projeto, datapast, dataenvase, statusProcess,idtype, qtdcalda  } = request.body;
+    const { id, projeto, datapast, dataenvase, statusProcess,idtype, qtdcalda, qtdcaixas, qtdunidades, onlyprocessresum  } = request.body;
     const updateProcess = container.resolve(ProcessUpdateService);
-    const process = await updateProcess.execute({ id, projeto, datapast, dataenvase, statusProcess,idtype, qtdcalda });
+    const process = await updateProcess.execute({ id, projeto, datapast, dataenvase, statusProcess,idtype, qtdcalda, qtdcaixas, qtdunidades, onlyprocessresum });
 
     if (process && process.success === false) {
       return response.status(BAD_REQUEST).json({ message: process.message });

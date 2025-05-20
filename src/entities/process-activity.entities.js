@@ -201,6 +201,14 @@ export default new EntitySchema({
         qtdpallets:{
             type: 'int',
             nullable:true
+        },
+        file5: {
+            type: 'text',
+            nullable:true
+        },
+        file6: {
+            type: 'text',
+            nullable:true
         }
     },
     relations: {
