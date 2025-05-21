@@ -1,3 +1,4 @@
+DELIMITER $$
 CREATE FUNCTION ajusta_data(data_input DATETIME)
 RETURNS VARCHAR(19)
 DETERMINISTIC
@@ -11,10 +12,10 @@ BEGIN
     SET data_formatada = DATE_FORMAT(data_input, '%d/%m/%Y %H:%i:%s');
 
     RETURN data_formatada;
-END;
+END$$
+DELIMITER ;
 
-
-
+DELIMITER $$
 CREATE FUNCTION ajusta_status(status_in VARCHAR(50))
 RETURNS VARCHAR(100)
 DETERMINISTIC
@@ -28,9 +29,10 @@ BEGIN
     SELECT status INTO status_string FROM status WHERE id = status_in LIMIT 1;
 
     RETURN status_string;
-END;
+END$$
 
 
+DELIMITER $$
 CREATE OR REPLACE FUNCTION ajusta_check(check_in VARCHAR(50))
 RETURNS VARCHAR(100)
 DETERMINISTIC
@@ -50,6 +52,6 @@ BEGIN
         RETURN check_in;
 
     END IF;
-END;
+END$$
 
 
