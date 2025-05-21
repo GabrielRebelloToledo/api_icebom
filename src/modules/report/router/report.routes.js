@@ -6,14 +6,16 @@ import UserType from '../../user/enums/EUsers.js';
 
 const reportsRoutes = express.Router();
 
+    reportsRoutes.get('/show/all/:processId/:nome',
+    /* ensureAuthenticated,
+    ensureAuthorized([UserType.ADMIN, UserType.USER]), */
+    ReportController.showAll);
+
     reportsRoutes.get('/show/:processId/:stepId/:nome',
     /* ensureAuthenticated,
     ensureAuthorized([UserType.ADMIN, UserType.USER]), */
     ReportController.show);
 
-    reportsRoutes.get('/show/all/:processId/:nome',
-    /* ensureAuthenticated,
-    ensureAuthorized([UserType.ADMIN, UserType.USER]), */
-    ReportController.showAll);
+    
 
 export default reportsRoutes;
