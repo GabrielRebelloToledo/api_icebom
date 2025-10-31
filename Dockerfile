@@ -13,7 +13,7 @@ RUN npm install
 COPY --chown=node:node . .
 
 # Expõe a porta em que a API será executada
-EXPOSE 3000
+EXPOSE 7000
 
 # Comando para iniciar a aplicação
 CMD ["node", "app.js"]
