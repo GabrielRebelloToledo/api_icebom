@@ -7,9 +7,9 @@ services:
     environment:
       - NODE_ENV=production
     expose:
-      - "3000"
+      - "7000"
     ports:
-      - "3000:3000"
+      - "7000:7000"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro  # Mapeando o diretório dos certificados
     networks:

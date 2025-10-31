@@ -1,13 +1,17 @@
 {
   "routes": [
     "/",
+    "/composicao",
     "/cusuario",
     "/fluxo",
     "/fluxo-resumido",
     "/inicio",
     "/processos",
     "/produtos",
+    "/produtos-mp",
+    "/separacao",
     "/status",
+    "/Status-Separacao",
     "/tipo-produto"
   ]
 }

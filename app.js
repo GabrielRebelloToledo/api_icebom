@@ -6,15 +6,22 @@ import { initializeDatabase, startServer } from './src/shared/infra/environments
 // Rotas iniciais
 
 import userSessions from './src/modules/user/routes/sessions.routes.js';
-import flowroutes  from './src/modules/flow/routes/flow.routes.js';
-import processroutes  from './src/modules/process/routes/process.routes.js';
+import flowroutes from './src/modules/flow/routes/flow.routes.js';
+import processroutes from './src/modules/process/routes/process.routes.js';
 import productsRoutes from './src/modules/products/routes/products.routes.js';
+import productsMpRoutes from './src/modules/products-mp/routes/products-mp.routes.js';
 import uploadRoutes from './src/modules/files/routes/files.routes.js';
 import stepform from './src/modules/forms/routes/forms.routes.js';
 import processActivityRoutes from './src/modules/process-activity/routes/process-activity.routes.js';
 import statusRoutes from './src/modules/status/routes/status.routes.js';
 import reportsRoutes from './src/modules/report/router/report.routes.js';
 import typeRoutes from './src/modules/typeproducts/routes/type.routes.js';
+import composicaoCabRoutes from './src/modules/composicao/routes/composicao-cab.routes.js';
+import composicaoRoutes from './src/modules/composicao/routes/composicao.routes.js';
+import separacaoCabRoutes from './src/modules/separacao/routes/separacao-cab.routes.js';
+import separacaoItensRoutes from './src/modules/separacao/routes/separacao-itens.routes.js';
+
+import statusSeparacaoRoutes from './src/modules/statusSeparacao/routes/status.routes.js';
 
 import corsConfig from './src/config/cors.config.js';
 import cors from 'cors';
@@ -45,12 +52,24 @@ app.use('/sessions', userSessions);
 app.use('/flow', flowroutes);
 app.use('/process', processroutes);
 app.use('/products', productsRoutes);
-app.use('/upload',uploadRoutes);
-app.use('/stepform',stepform);
-app.use('/activity',processActivityRoutes);
-app.use('/status',statusRoutes);
-app.use('/report',reportsRoutes);
-app.use('/type',typeRoutes);
+app.use('/productsmp', productsMpRoutes);
+app.use('/upload', uploadRoutes);
+app.use('/stepform', stepform);
+app.use('/activity', processActivityRoutes);
+app.use('/status', statusRoutes);
+app.use('/report', reportsRoutes);
+app.use('/type', typeRoutes);
+
+app.use('/cabcomposicao', composicaoCabRoutes);
+app.use('/composicao', composicaoRoutes);
+
+app.use('/separacao', separacaoCabRoutes);
+app.use('/separacao-itens', separacaoItensRoutes);
+
+app.use('/statussep', statusSeparacaoRoutes);
+
+
+
 // Inicializar o banco de dados
 initializeDatabase();
 // Iniciar o servidor
