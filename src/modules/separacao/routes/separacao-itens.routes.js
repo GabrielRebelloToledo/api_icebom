@@ -40,4 +40,7 @@ separacaoItensRoutes.post('/update/quantidade/produto/:id/:codbarras/:qtd/:statu
     ItensSeparacaoController.updateQuantidade);
 
 
+ 
+
+
 export default separacaoItensRoutes;
