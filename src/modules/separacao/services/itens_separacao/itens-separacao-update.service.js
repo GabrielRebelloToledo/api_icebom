@@ -32,13 +32,9 @@ class UpdateItensSeparacaoService {
         const CodigodoProdutoMp = produtoMP.id;
 
         console.log(produtoMP);
-
-
-        const listaSeparacao = await this.Repository.findOne({ where: { idprod: CodigodoProdutoMp } });
-
-
+        const listaSeparacao = await this.Repository.findOne({ where: { idprod: CodigodoProdutoMp, idCabSep: id } });
         console.log(listaSeparacao);
- 
+
         if (Number(status) === 6) {
             listaSeparacao.qtdeseparada = qtd;
             await this.Repository.save(listaSeparacao);
