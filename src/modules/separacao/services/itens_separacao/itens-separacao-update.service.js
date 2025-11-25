@@ -51,6 +51,28 @@ class UpdateItensSeparacaoService {
         }
     }
 
+    async atualizaQuantidadeManual({ id, idcab, qtd, status }) {
+
+ 
+        const listaSeparacao = await this.Repository.findOne({ where: { id: id, idCabSep: idcab  } });
+        console.log(listaSeparacao);
+
+        if (Number(status) === 6) {
+            listaSeparacao.qtdeseparada = qtd;
+            await this.Repository.save(listaSeparacao);
+            return { sucesso: true, mensagem: 'Item incluído.' };
+
+        }
+        if (Number(status) === 8) {
+            listaSeparacao.qtdeconferida = qtd;
+            await this.Repository.save(listaSeparacao);
+            return { sucesso: true, mensagem: 'Item incluído.' };
+        }
+        else {
+            return { sucesso: false, mensagem: 'Ativade com Status Incorreto de Inclusão!' };
+        }
+    }
+
 }
 
 export default UpdateItensSeparacaoService;
