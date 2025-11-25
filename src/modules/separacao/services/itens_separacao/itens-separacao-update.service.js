@@ -58,13 +58,13 @@ class UpdateItensSeparacaoService {
         console.log(listaSeparacao);
 
         if (Number(status) === 6) {
-            listaSeparacao.qtdeseparada = (listaSeparacao.qtdeseparada + qtd);
+            listaSeparacao.qtdeseparada = (Number(listaSeparacao.qtdeseparada) + Number(qtd));
             await this.Repository.save(listaSeparacao);
             return { sucesso: true, mensagem: 'Item incluído.' };
 
         }
         if (Number(status) === 8) {
-            listaSeparacao.qtdeconferida = (listaSeparacao.qtdeconferida + qtd);
+            listaSeparacao.qtdeconferida = (Number(listaSeparacao.qtdeconferida) + Number(qtd));
             await this.Repository.save(listaSeparacao);
             return { sucesso: true, mensagem: 'Item incluído.' };
         }
