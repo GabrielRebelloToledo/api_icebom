@@ -11,16 +11,16 @@ class CreateItensSeparacaoService {
   }
 
 
-  async execute({ idCabSep, idprod, qtdeaseparar, qtdeseparada, qtdeconferida }) {
-    const create = this.Repository.create({ idCabSep, idprod, qtdeaseparar, qtdeseparada, qtdeconferida });
+  async execute({ idCabSep, idprod, name, qtdeaseparar, qtdeseparada, qtdeconferida, codvol }) {
+    const create = this.Repository.create({ idCabSep, idprod, name, qtdeaseparar, qtdeseparada, qtdeconferida, codvol });
     // Salvar no banco
     const data = await this.Repository.save(create);
 
     if (!data) {
-      return { success: false, message: "Composição não criada!" }
+      return { success: false, message: "Itens separados não criados!" }
     }
 
-    return { success: true, message: "Composição criada!" }
+    return { success: true, message: "Itens separados criados!" }
 
   }
 }
@@ -29,4 +29,3 @@ export default CreateItensSeparacaoService;
 
 
 
- 

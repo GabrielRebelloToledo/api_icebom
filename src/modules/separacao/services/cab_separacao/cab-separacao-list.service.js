@@ -13,7 +13,7 @@ class ListCabSeparacaoService {
   async execute() {
 
     console.log("Cheguei aqui")
-    const prod = await this.Repository.find({ relations: { products: true, statusSeparacao: true, userSep: true, userConf: true } });
+    const prod = await this.Repository.find({ relations: { statusSeparacao: true, userSep: true, userConf: true } });
 
     if (!prod) {
       throw new AppError(AppErrorTypes.prods.notFound, NOT_FOUND);

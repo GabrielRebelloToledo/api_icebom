@@ -1,8 +1,12 @@
 import 'dotenv/config';  // Carregar as variáveis do arquivo .env
 // Importando o TypeORM
 import { DataSource } from 'typeorm';
+import fb from 'node-firebird';
+
 import fs from 'fs';
 import https from 'https';
+
+import CapturaComposicaoService from '../../../modules/buscaComposicao/services/captura-composicao.js'
 
 
 const AppDataSource = new DataSource({
@@ -22,11 +26,81 @@ const AppDataSource = new DataSource({
     }
 });
 
+
+
+/**
+ * Firebird (node-firebird)
+ */
+const firebirdOptions = {
+    host: process.env.RO_DB_HOST,             // ex: '127.0.0.1'
+    port: Number(process.env.RO_DB_PORT) || 3050,
+    database: process.env.RO_DB_PATH,         // caminho completo do .FDB
+    user: process.env.RO_DB_USER,             // ex: 'SYSDBA'
+    password: process.env.RO_DB_PASSWORD,
+    lowercase_keys: false,
+    role: null,
+    pageSize: 4096,
+    charset: 'UTF8',                          // ajuste se seu banco estiver em ISO8859_1 / WIN1252
+    dialect: 3,
+};
+
+export function queryFirebird(query, params = []) {
+    return new Promise((resolve, reject) => {
+        fb.attach(firebirdOptions, (err, db) => {
+            if (err) {
+                return reject(err);
+            }
+
+            db.query(query, params, (err2, result) => {
+                db.detach(); // SEMPRE liberar
+
+                if (err2) {
+                    return reject(err2);
+                }
+
+                resolve(result);
+            });
+        });
+    });
+}
+
+/**
+ * Inicializar Firebird (equivalente ao "initialize" do TypeORM)
+ */
+export function initializeFirebird() {
+    
+    return new Promise((resolve, reject) => {
+        fb.attach(firebirdOptions, (err, db) => {
+            if (err) {
+                console.error('Erro ao conectar no Firebird:', err);
+                return reject(err);
+            }
+
+            // Teste simples de query
+            db.query('SELECT 1 FROM RDB$DATABASE', (err2) => {
+                db.detach();
+
+                if (err2) {
+                    console.error('Firebird conectado, mas falhou ao executar query de teste:', err2);
+                    return reject(err2);
+                }
+
+                console.log('Conexão Firebird (read-only) estabelecida com sucesso!');
+                resolve(true);
+            });
+        });
+    });
+}
+
+
 // Função para inicializar o banco de dados
 export const initializeDatabase = async () => {
     try {
         await AppDataSource.initialize();
         console.log('Conexão estabelecida com sucesso!');
+
+        // Firebird (node-firebird)
+        await initializeFirebird();
     } catch (err) {
         console.error('Erro na conexão:', err);
         process.exit(1);

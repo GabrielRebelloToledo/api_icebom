@@ -25,6 +25,12 @@ export default new EntitySchema({
         idprod: {
             type: 'int',
         },
+        name: {
+            type: 'varchar',
+        },
+        codvol: {
+            type: 'varchar',
+        },
         qtdeaseparar: {
             type: 'decimal',
             precision: 10,
@@ -46,12 +52,11 @@ export default new EntitySchema({
     },
 
     relations: {
-        productsMP: {
-            type: 'many-to-one',
-            target: 'ProductsMP',
-            joinColumn: { name: 'idprod' }
-        },
-
+        /*  productsMP: {
+             type: 'many-to-one',
+             target: 'ProductsMP',
+             joinColumn: { name: 'idprod' }
+         }, */
         cabSeparacao: {
             type: 'many-to-one',
             target: 'CabSeparacao',

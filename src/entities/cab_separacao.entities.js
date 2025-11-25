@@ -17,10 +17,15 @@ export default new EntitySchema({
         id: {
             primary: true,
             type: 'int',
-            generated: true
+        },
+        idOp: {
+            type: 'int',
         },
         idprod: {
             type: 'int',
+        },
+        name: {
+            type: 'varchar',
         },
         qtdeprod: {
             type: 'decimal',
@@ -51,11 +56,7 @@ export default new EntitySchema({
     },
 
     relations: {
-        products: {
-            type: 'many-to-one',
-            target: 'Products',
-            joinColumn: { name: 'idprod' }
-        },
+
         statusSeparacao: {
             type: 'many-to-one',
             target: 'StatusSeparacao',

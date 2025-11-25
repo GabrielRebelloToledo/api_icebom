@@ -19,6 +19,37 @@ class CreateCabSeparacaoService {
   }
 
 
+
+  async executeMaxibom({ id, idOp, idprod, qtdeprod, status, observacao, name }) {
+    try {
+      // (opcional) validações rápidas
+      if (!idprod || !qtdeprod) {
+        return { sucesso: false, mensagem: 'idprod e qtdeprod são obrigatórios.' };
+      }
+
+      // cria e salva o cabeçalho
+      const entidade = this.Repository.create({ id, idOp, idprod, qtdeprod, status, observacao, name });
+      const data = await this.Repository.save(entidade);
+
+      if (!data || !data.id) {
+        return { sucesso: false, mensagem: 'Id do processo não encontrado após salvar.' };
+      }
+
+
+      return {
+        sucesso: true,
+        mensagem: 'Separação criados.',
+        dados: { cabecalho: data, itens: '' },
+
+      };
+    } catch (err) {
+      console.error('[execute] Erro:', err?.message || err);
+      // não derruba o servidor; controller devolve 400 com esta mensagem
+      return { sucesso: false, mensagem: err?.message || 'Falha ao criar separação.' };
+    }
+  }
+
+
   async execute({ idprod, qtdeprod, status, observacao }) {
     try {
       // (opcional) validações rápidas

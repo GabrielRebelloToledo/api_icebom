@@ -13,11 +13,11 @@ class ListItensSeparacaoService {
   async execute(id) {
     const prod = await this.Repository.find({
       relations: {
-        productsMP: true, cabSeparacao: {
-          products: true,               // relação dentro do cabComposicao
-        },
+        cabSeparacao: true,
       }, where: { idCabSep: id }
     });
+
+
 
     if (!prod) {
       throw new AppError(AppErrorTypes.prods.notFound, NOT_FOUND);

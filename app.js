@@ -23,6 +23,8 @@ import separacaoItensRoutes from './src/modules/separacao/routes/separacao-itens
 
 import statusSeparacaoRoutes from './src/modules/statusSeparacao/routes/status.routes.js';
 
+import separacaoImportarRoutes from './src/modules/buscaComposicao/routes/capturar-composicao.routes.js'
+
 import corsConfig from './src/config/cors.config.js';
 import cors from 'cors';
 
@@ -67,6 +69,8 @@ app.use('/separacao', separacaoCabRoutes);
 app.use('/separacao-itens', separacaoItensRoutes);
 
 app.use('/statussep', statusSeparacaoRoutes);
+
+app.use('/importarOpsSeparacao', separacaoImportarRoutes)
 
 
 
