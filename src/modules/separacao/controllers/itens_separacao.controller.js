@@ -83,6 +83,29 @@ class ItensSeparacaoController {
     }
   }
 
+  async updateQuantidadeLimpar(request, response) {
+    try {
+      const { id, idcab, status } = request.params;
+
+      const update = container.resolve(UpdateItensSeparacaoService);
+      const data = await update.atualizaQuantidadeLimpar({ id, idcab, status });
+
+      // verifica retorno do service
+      if (data && data.sucesso === false) {
+        console.log("Entrou no nao sucesso!")
+        return response.status(400).json({ message: data.mensagem });
+      }
+
+      // sucesso
+      return response.status(200).json({ message: data.mensagem ?? 'Quantidade atualizada com sucesso!' });
+    } catch (error) {
+      console.error('[updateStatus] Erro:', error.message || error);
+      return response.status(400).json({
+        message: error.message || 'Falha ao atualizar Quantidade.',
+      });
+    }
+  }
+
 
   
 

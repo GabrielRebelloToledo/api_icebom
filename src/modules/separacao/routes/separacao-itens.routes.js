@@ -44,6 +44,12 @@ separacaoItensRoutes.post('/update/quantidade/produto/manual/separacao/:id/:idca
     ensureAuthorized([UserType.ADMIN]), */
     ItensSeparacaoController.updateQuantidadeManual);
 
+
+separacaoItensRoutes.post('/update/quantidade/produto/limpar/separacao/:id/:idcab/:status',
+    /* ensureAuthenticated,
+    ensureAuthorized([UserType.ADMIN]), */
+    ItensSeparacaoController.updateQuantidadeManual);
+
     
  
 
