@@ -68,13 +68,16 @@ export function queryFirebird(query, params = []) {
  * Inicializar Firebird (equivalente ao "initialize" do TypeORM)
  */
 export function initializeFirebird() {
-    
+
     return new Promise((resolve, reject) => {
         fb.attach(firebirdOptions, (err, db) => {
             if (err) {
-                console.error('Erro ao conectar no Firebird:', err);
-                return reject(err);
+                console.error('❌ Erro ao conectar no Firebird (read-only):', err);
+                console.warn('➡️ Seguindo sem Firebird...');
+                return resolve(false); // NUNCA reject
             }
+
+
 
             // Teste simples de query
             db.query('SELECT 1 FROM RDB$DATABASE', (err2) => {
