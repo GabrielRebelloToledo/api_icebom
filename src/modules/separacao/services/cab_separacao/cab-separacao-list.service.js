@@ -9,10 +9,10 @@ class ListCabSeparacaoService {
 
     this.Repository = AppDataSource.getRepository(CabSeparacao);
   }
+  
 
   async execute() {
 
-    console.log("Cheguei aqui")
     const prod = await this.Repository.find({ relations: { statusSeparacao: true, userSep: true, userConf: true } });
 
     if (!prod) {

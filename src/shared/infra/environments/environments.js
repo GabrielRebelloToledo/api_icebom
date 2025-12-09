@@ -76,9 +76,6 @@ export function initializeFirebird() {
                 console.warn('➡️ Seguindo sem Firebird...');
                 return resolve(false); // NUNCA reject
             }
-
-
-
             // Teste simples de query
             db.query('SELECT 1 FROM RDB$DATABASE', (err2) => {
                 db.detach();

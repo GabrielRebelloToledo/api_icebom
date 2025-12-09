@@ -59,6 +59,7 @@ class CapturaComposicaoService {
         from SOLICITACAO_PRODUCAO_ITENS ITENS
         join SIV_CPRO MPRIMA on ITENS.COD_CPRO = MPRIMA.COD_PRO
         where ITENS.ID_SOLICITACAO = ? and ITENS.QUANT_USADA > 0
+        AND MPRIMA.LEITURA_TABLET = 'S'
         order by ITENS.ID_SOL_PROD_ITENS
         `;
 
