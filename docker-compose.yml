@@ -12,6 +12,7 @@ services:
       - "3000:3000"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro  # Mapeando o diretório dos certificados
+      - /home/administrator/arquivos_fluxo:/home/node/app/src/modules/files/uploads
     networks:
       - app_network  # Definindo uma rede (caso você precise de outras interações entre containers)
     restart: unless-stopped
