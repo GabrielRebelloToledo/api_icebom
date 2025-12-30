@@ -25,6 +25,11 @@ import statusSeparacaoRoutes from './src/modules/statusSeparacao/routes/status.r
 
 import separacaoImportarRoutes from './src/modules/buscaComposicao/routes/capturar-composicao.routes.js'
 
+
+
+import inventarioImportarRoutes from './src/modules/inventario/routes/buscar-inventario.routes.js';
+
+
 import corsConfig from './src/config/cors.config.js';
 import cors from 'cors';
 
@@ -72,7 +77,7 @@ app.use('/statussep', statusSeparacaoRoutes);
 
 app.use('/importarOpsSeparacao', separacaoImportarRoutes)
 
-
+app.use('/importarInventario', inventarioImportarRoutes)
 
 // Inicializar o banco de dados
 initializeDatabase();

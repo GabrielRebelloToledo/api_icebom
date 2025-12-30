@@ -4,18 +4,21 @@ import { queryFirebird } from '../../../shared/infra/environments/environments.j
 import CreateCabSeparacaoService from '../../separacao/services/cab_separacao/cab-separacao-create.service.js';
 import CreateItensSeparacaoService from '../../separacao/services/itens_separacao/itens-separacao-create.service.js';
 import { container } from 'tsyringe';
+
 class CapturaComposicaoService {
 
 
-    async buscarOpsLiberadasNaoImportadas() {
+    async buscarInventariosLiberadosNaoImportados() {
 
-        const sql = `SELECT P.*, sp.DESC_PRO FROM SOLICITACAO_PRODUCAO P INNER JOIN SIV_PRO sp ON P.COD_ITEM = sp.COD_PRO  WHERE P.TABLET_IMPORTOU = 'N' AND P.TABLET_IMPORTAR ='S'`;
+        const sql = `SELECT * FROM INVENTARIO_ESTOQUE  WHERE TABLET_IMPORTOU = 'N' AND TABLET_IMPORTAR ='S'`;
 
         const rows = await queryFirebird(sql, []);
 
         for (const row of rows) {
 
-            const datas = {
+            console.log(row)
+
+            /* const datas = {
                 id: Number(row.ID_PRODUCAO),
                 idOp: Number(row.ID_PRODUCAO),
                 idprod: row.COD_ITEM,
@@ -23,9 +26,9 @@ class CapturaComposicaoService {
                 status: 3,
                 observacao: '',
                 name: row.DESC_PRO
-            }
+            } */
             try {
-                const create = container.resolve(CreateCabSeparacaoService);
+               /*  const create = container.resolve(CreateCabSeparacaoService);
                 const data = await create.executeMaxibom(datas);
                 console.log(data);
 
@@ -34,7 +37,7 @@ class CapturaComposicaoService {
 
                     await this.updateOPImportou(row.ID_PRODUCAO);
 
-                }
+                } */
 
             } catch (e) {
                 console.error("Ocorreu um erro ao inserir op: " + row.ID_PRODUCAO);
@@ -46,28 +49,22 @@ class CapturaComposicaoService {
     async buscarProdutosPorOps(id) {
         const sql = ` 
         select 
-        ITENS.ID_SOL_PROD_ITENS,
-        ITENS.ID_SOLICITACAO,
-        ITENS.COD_CPRO,
-        ITENS.QUANT_USADA,
-        ITENS.DATA_FABRICACAO,
-        ITENS.NUM_LOTE,
-        ITENS.CUSTO_UNIT,
-        ITENS.NIVEL,
-        MPRIMA.DESC_PRO,
-        MPRIMA.DESC_UND
-        from SOLICITACAO_PRODUCAO_ITENS ITENS
-        join SIV_CPRO MPRIMA on ITENS.COD_CPRO = MPRIMA.COD_PRO
-        where ITENS.ID_SOLICITACAO = ? and ITENS.QUANT_USADA > 0
-        AND MPRIMA.LEITURA_TABLET = 'S'
-        order by ITENS.ID_SOL_PROD_ITENS
+       ITENS.*
+        from INVENTARIO_ESTOQUE INV join INVENTARIO_ITENS_ESTOQUE ITENS
+        on INV.ID_INVENTARIO = ITENS.ID_INVENTARIO
+        where   INV.TABLET_IMPORTOU = 'N' AND INV.TABLET_IMPORTAR ='S'
+        order by ITENS.COD_PRO
         `;
 
         const rows = await queryFirebird(sql, [id]);
 
         for (const row of rows) {
+            
 
-            const datas = {
+            console.log("Itens: [....]")
+            console.log(row)
+
+            /* const datas = {
                 idCabSep: Number(row.ID_SOLICITACAO),
                 idprod: row.COD_CPRO,
                 name: row.DESC_PRO,
@@ -75,13 +72,13 @@ class CapturaComposicaoService {
                 qtdeseparada: 0,
                 qtdeconferida: 0,
                 codvol: row.DESC_UND
-            }
+            } */
             try {
-                const create = container.resolve(CreateItensSeparacaoService);
+               /*  const create = container.resolve(CreateItensSeparacaoService);
                 const data = await create.execute(datas);
-                //console.log(data);
+                console.log(data);
 
-                /* if (data) {
+                if (data) {
                     this.buscarProdutosPorOps(row.ID_PRODUCAO);
                 } */
 
