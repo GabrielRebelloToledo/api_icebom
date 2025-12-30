@@ -14,11 +14,13 @@ class CapturaComposicaoService {
 
         const rows = await queryFirebird(sql, []);
 
-         console.log(row)
+
+        console.log("Cheguei aqui! Inventario")
+        console.log(rows)
 
         for (const row of rows) {
 
-        
+
             /* const datas = {
                 id: Number(row.ID_PRODUCAO),
                 idOp: Number(row.ID_PRODUCAO),
@@ -29,16 +31,16 @@ class CapturaComposicaoService {
                 name: row.DESC_PRO
             } */
             try {
-               /*  const create = container.resolve(CreateCabSeparacaoService);
-                const data = await create.executeMaxibom(datas);
-                console.log(data);
-
-                if (data) {
-                    await this.buscarProdutosPorOps(row.ID_PRODUCAO);
-
-                    await this.updateOPImportou(row.ID_PRODUCAO);
-
-                } */
+                /*  const create = container.resolve(CreateCabSeparacaoService);
+                 const data = await create.executeMaxibom(datas);
+                 console.log(data);
+ 
+                 if (data) {
+                     await this.buscarProdutosPorOps(row.ID_PRODUCAO);
+ 
+                     await this.updateOPImportou(row.ID_PRODUCAO);
+ 
+                 } */
 
             } catch (e) {
                 console.error("Ocorreu um erro ao inserir op: " + row.ID_PRODUCAO);
@@ -57,15 +59,15 @@ class CapturaComposicaoService {
         order by ITENS.COD_PRO
         `;
 
-        const rows = await queryFirebird(sql,[]);
+        const rows = await queryFirebird(sql, []);
 
         console.log("Itens: [....]")
         console.log(rows)
 
         for (const row of rows) {
-            
 
-            
+
+
 
             /* const datas = {
                 idCabSep: Number(row.ID_SOLICITACAO),
@@ -77,13 +79,13 @@ class CapturaComposicaoService {
                 codvol: row.DESC_UND
             } */
             try {
-               /*  const create = container.resolve(CreateItensSeparacaoService);
-                const data = await create.execute(datas);
-                console.log(data);
-
-                if (data) {
-                    this.buscarProdutosPorOps(row.ID_PRODUCAO);
-                } */
+                /*  const create = container.resolve(CreateItensSeparacaoService);
+                 const data = await create.execute(datas);
+                 console.log(data);
+ 
+                 if (data) {
+                     this.buscarProdutosPorOps(row.ID_PRODUCAO);
+                 } */
 
             } catch (e) {
                 console.error("Ocorreu um erro ao inserir op: " + row.ID_PRODUCAO);

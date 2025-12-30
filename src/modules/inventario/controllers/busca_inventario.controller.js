@@ -11,6 +11,8 @@ class CapturarInventarioController {
 
   async create(request, response) {
 
+     console.log("Cheguei aqui! Inventario Controller")
+
     const create = container.resolve(CapturaComposicaoService);
     const data = await create.buscarInventariosLiberadosNaoImportados();
 
