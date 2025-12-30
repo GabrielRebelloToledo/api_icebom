@@ -14,10 +14,11 @@ class CapturaComposicaoService {
 
         const rows = await queryFirebird(sql, []);
 
+         console.log(row)
+
         for (const row of rows) {
 
-            console.log(row)
-
+        
             /* const datas = {
                 id: Number(row.ID_PRODUCAO),
                 idOp: Number(row.ID_PRODUCAO),
@@ -56,13 +57,15 @@ class CapturaComposicaoService {
         order by ITENS.COD_PRO
         `;
 
-        const rows = await queryFirebird(sql, [id]);
+        const rows = await queryFirebird(sql,[]);
+
+        console.log("Itens: [....]")
+        console.log(rows)
 
         for (const row of rows) {
             
 
-            console.log("Itens: [....]")
-            console.log(row)
+            
 
             /* const datas = {
                 idCabSep: Number(row.ID_SOLICITACAO),
