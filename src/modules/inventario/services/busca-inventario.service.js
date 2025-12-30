@@ -10,7 +10,12 @@ class CapturaComposicaoService {
 
     async buscarInventariosLiberadosNaoImportados() {
 
-        const sql = `SELECT * FROM INVENTARIO_ESTOQUE  WHERE TABLET_IMPORTOU = 'N' AND TABLET_IMPORTAR ='S'`;
+       // const sql = `SELECT * FROM INVENTARIO_ESTOQUE  WHERE TABLET_IMPORTOU = 'N' AND TABLET_IMPORTAR ='S'`;
+
+       const sql = `SELECT FIRST 10 *
+                    FROM INVENTARIO_ITENS_ESTOQUE
+                    ORDER BY ID DESC;`
+
 
         const rows = await queryFirebird(sql, []);
 
