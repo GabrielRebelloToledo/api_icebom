@@ -52,14 +52,13 @@ class CapturaComposicaoService {
                  const data = await create.executeMaxibom(datas);
                  
                  if (data) {
-                     await this.buscarProdutosPorOps(row.ID_PRODUCAO);
+                     await this.buscarProdutosPorOps(row.ID_INVENTARIO);
 
-                     await this.updateInventarioImportou(row.ID_PRODUCAO);
-
+                     //await this.updateInventarioImportou(row.ID_INVENTARIO);
                  }
 
             } catch (e) {
-                console.error("Ocorreu um erro ao inserir op: " + row.ID_PRODUCAO);
+                console.error("Ocorreu um erro ao inserir op: " + row.ID_INVENTARIO);
             }
         }
 
@@ -126,7 +125,7 @@ class CapturaComposicaoService {
 
 
         try {
-            const sql = `UPDATE INVENTARIO_ESTOQUE SET TABLET_IMPORTOU = 'S' WHERE ID_PRODUCAO = ?`;
+            const sql = `UPDATE INVENTARIO_ESTOQUE SET TABLET_IMPORTOU = 'S' WHERE ID_INVENTARIO = ?`;
             const rows = await queryFirebird(sql, [id]);
             console.log(rows)
         } catch (error) {
