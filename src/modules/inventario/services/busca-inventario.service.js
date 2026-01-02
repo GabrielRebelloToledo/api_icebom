@@ -46,8 +46,7 @@ class CapturaComposicaoService {
                 //console.log("-------------CABEÇALHO INICIO------------------")
                 //console.log(datas)
                 //console.log("-------------CABEÇALHO FIM------------------")
-                await this.buscarProdutosPorOps(row.ID_INVENTARIO);
-
+                 
                  const create = container.resolve(CreateCabInventarioService);
                  const data = await create.executeMaxibom(datas);
 
