@@ -29,8 +29,8 @@ class CapturaComposicaoService {
         }
         */
 
-        console.log("Cheguei aqui! Inventario")
-        console.log(rows)
+        //console.log("Cheguei aqui! Inventario")
+        //console.log(rows)
 
         for (const row of rows) {
 
@@ -53,7 +53,7 @@ class CapturaComposicaoService {
                  console.log(data)
                  
                  if (data) {
-                     //await this.buscarProdutosPorOps(row.ID_INVENTARIO);
+                     await this.buscarProdutosPorOps(row.ID_INVENTARIO);
 
                      //await this.updateInventarioImportou(row.ID_INVENTARIO);
                  }
