@@ -12,16 +12,13 @@ class CreateCabInventarioService {
 
   async executeMaxibom({ id, status, data }) {
     try {
-      // (opcional) validações rápidas
-      if (!idprod || !qtdeprod) {
-        return { sucesso: false, mensagem: 'idprod e qtdeprod são obrigatórios.' };
-      }
+       
 
       // cria e salva o cabeçalho
       const entidade = this.Repository.create({ id, status, data });
-      const data = await this.Repository.save(entidade);
+      const datas = await this.Repository.save(entidade);
 
-      if (!data || !data.id) {
+      if (!datas || !datas.id) {
         return { sucesso: false, mensagem: 'Id do processo não encontrado após salvar.' };
       }
 

@@ -50,9 +50,11 @@ class CapturaComposicaoService {
 
                  const create = container.resolve(CreateCabInventarioService);
                  const data = await create.executeMaxibom(datas);
+
+                 console.log(data)
                  
                  if (data) {
-                     await this.buscarProdutosPorOps(row.ID_INVENTARIO);
+                     //await this.buscarProdutosPorOps(row.ID_INVENTARIO);
 
                      //await this.updateInventarioImportou(row.ID_INVENTARIO);
                  }
