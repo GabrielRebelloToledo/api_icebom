@@ -21,8 +21,7 @@ export default new EntitySchema({
             type: 'int',
         },
         status: {
-            type: 'varchar',
-            nullable: true
+            type: 'varchar'
         },
         codusuinvent: {
             type: 'varchar',

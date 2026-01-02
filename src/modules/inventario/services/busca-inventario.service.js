@@ -43,9 +43,9 @@ class CapturaComposicaoService {
 
             try {
 
-                console.log("-------------CABEÇALHO INICIO------------------")
-                console.log(datas)
-                console.log("-------------CABEÇALHO FIM------------------")
+                //console.log("-------------CABEÇALHO INICIO------------------")
+                //console.log(datas)
+                //console.log("-------------CABEÇALHO FIM------------------")
                 await this.buscarProdutosPorOps(row.ID_INVENTARIO);
 
                  const create = container.resolve(CreateCabInventarioService);
@@ -106,9 +106,9 @@ class CapturaComposicaoService {
 
             try {
 
-                console.log("-------------ITENS INICIO------------------")
-                console.log(datas)
-                console.log("-------------ITENS FIM------------------")
+                //console.log("-------------ITENS INICIO------------------")
+                //console.log(datas)
+                //console.log("-------------ITENS FIM------------------")
 
                 const create = container.resolve(CreateItensInventarioService);
                 await create.execute(datas);
