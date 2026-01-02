@@ -77,6 +77,11 @@ class CabInventarioController {
   async delete(request, response) {
 
     const id = request.params.id;
+
+    console.log("Cheguei no id do delete");
+    console.log(id);
+
+
     const delet = container.resolve(DeleteCabInventarioService);
     const data = await delet.execute(id);
     if (data && data.success === false) {
