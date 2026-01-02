@@ -36,9 +36,11 @@ export default new EntitySchema({
         },
         local: {
             type: 'varchar',
+            nullable: true
         },
         tipoitem: {
             type: 'varchar',
+            nullable: true
         },
         unidade: {
             type: 'varchar',
