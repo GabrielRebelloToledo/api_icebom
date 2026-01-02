@@ -70,7 +70,8 @@ export default new EntitySchema({
         cabInventario: {
             type: 'many-to-one',
             target: 'CabInventario',
-            joinColumn: { name: 'idCabInvent' }
+            joinColumn: { name: 'idCabInvent' },
+            onDelete: 'CASCADE'
         }
     }
 });

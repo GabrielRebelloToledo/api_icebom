@@ -6,7 +6,6 @@ import { NOT_FOUND } from '../../../../shared/infra/constants/http-status-code.c
 
 class ListItensInventarioService {
   constructor() {
-
     this.Repository = AppDataSource.getRepository(ItensInventario);
   }
 
@@ -14,7 +13,7 @@ class ListItensInventarioService {
     const prod = await this.Repository.find({
       relations: {
         cabInventario: true,
-      }, where: { idCabInvent: id }
+      }, where: { idCabInvent: id }, order: { id }
     });
 
 

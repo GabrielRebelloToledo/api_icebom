@@ -60,7 +60,8 @@ export default new EntitySchema({
         cabSeparacao: {
             type: 'many-to-one',
             target: 'CabSeparacao',
-            joinColumn: { name: 'idCabSep' }
+            joinColumn: { name: 'idCabSep' },
+            onDelete: 'CASCADE'
         }
     }
 });
