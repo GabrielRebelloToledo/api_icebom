@@ -28,7 +28,8 @@ import separacaoImportarRoutes from './src/modules/buscaComposicao/routes/captur
 
 
 import inventarioImportarRoutes from './src/modules/inventario/routes/buscar-inventario.routes.js';
-
+import inventarioCabRoutes from './src/modules/inventario/routes/inventario-cab.routes.js';
+import inventarioItensRoutes from './src/modules/inventario/routes/inventario-itens.routes.js';
 
 import corsConfig from './src/config/cors.config.js';
 import cors from 'cors';
@@ -78,6 +79,8 @@ app.use('/statussep', statusSeparacaoRoutes);
 app.use('/importarOpsSeparacao', separacaoImportarRoutes)
 
 app.use('/importarInventario', inventarioImportarRoutes)
+app.use('/importarInventario', inventarioCabRoutes)
+app.use('/inventario-itens', inventarioItensRoutes)
 
 // Inicializar o banco de dados
 initializeDatabase();

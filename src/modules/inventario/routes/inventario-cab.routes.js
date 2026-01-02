@@ -21,17 +21,11 @@ inventarioCabRoutes.get('/list',
     ensureAuthorized([UserType.ADMIN]), */
     CabInventarioController.list);
 
-inventarioCabRoutes.get('/list/active',
-    /* ensureAuthenticated,
-    ensureAuthorized([UserType.ADMIN]), */
-    CabInventarioController.listActive);
-
 
 inventarioCabRoutes.delete('/delete/:id',
     /* ensureAuthenticated,
     ensureAuthorized([UserType.ADMIN]), */
     CabInventarioController.delete);
-
 
 
 inventarioCabRoutes.post('/update/separacao/status/:id/:codusu/:status',

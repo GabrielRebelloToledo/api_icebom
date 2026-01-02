@@ -73,11 +73,6 @@ class CabInventarioController {
     return response.json(data);
   }
 
-  async listActive(request, response) {
-    const list = container.resolve(ListCabInventarioService);
-    const data = await list.executeActive();
-    return response.json(data);
-  }
 
   async delete(request, response) {
 

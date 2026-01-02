@@ -1,29 +1,31 @@
-import AppDataSource from '../../../../shared/infra/environments/environments.js';  // Importa a conexão do banco
-import AppError from '../../../../shared/errors/app-error.js'; // Classe personalizada de erro
-import ItensSeparacao from '../../../../entities/itens_separacao.entities.js';
-import AppErrorTypes from '../../../../shared/errors/app-error-types.js';
-import { NOT_FOUND } from '../../../../shared/infra/constants/http-status-code.constants.js';
+import AppDataSource from '../../../../shared/infra/environments/environments.js';
+import ItensInventario from '../../../../entities/itens_inventario.entities.js';
+
+
 
 class CreateItensInventarioService {
   constructor() {
-    this.Repository = AppDataSource.getRepository(ItensSeparacao);
+    this.Repository = AppDataSource.getRepository(ItensInventario);
 
   }
 
 
-  async execute({ idCabSep, idprod, name, qtdeaseparar, qtdeseparada, qtdeconferida, codvol }) {
-    const create = this.Repository.create({ idCabSep, idprod, name, qtdeaseparar, qtdeseparada, qtdeconferida, codvol });
+  async execute({ id, idCabInvent, idprod, descricaoprod, quantidade, local, estoque, diferenca, tipoitem,  unidade }) {
+    const create = this.Repository.create({ id, idCabInvent, idprod, descricaoprod, quantidade, local, estoque, diferenca, tipoitem,  unidade });
     // Salvar no banco
     const data = await this.Repository.save(create);
 
     if (!data) {
-      return { success: false, message: "Itens separados não criados!" }
+      return { success: false, message: "Itens invetário não criados!" }
     }
 
-    return { success: true, message: "Itens separados criados!" }
+    return { success: true, message: "Itens invetário criados!" }
 
   }
 }
+
+
+ 
 
 export default CreateItensInventarioService;
 

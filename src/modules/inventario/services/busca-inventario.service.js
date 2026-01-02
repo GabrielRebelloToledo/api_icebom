@@ -1,8 +1,8 @@
 
 import { queryFirebird } from '../../../shared/infra/environments/environments.js';
 
-import CreateCabSeparacaoService from '../../separacao/services/cab_separacao/cab-separacao-create.service.js';
-import CreateItensSeparacaoService from '../../separacao/services/itens_separacao/itens-separacao-create.service.js';
+import CreateCabInventarioService from '../services/cab_inventario/cab-inventario-create.service.js';
+import CreateItensInventarioService from '../services/itens_inventario/itens-inventario-create.service.js';
 import { container } from 'tsyringe';
 
 class CapturaComposicaoService {
@@ -11,9 +11,6 @@ class CapturaComposicaoService {
     async buscarInventariosLiberadosNaoImportados() {
 
         const sql = `SELECT ID_INVENTARIO, DATA FROM INVENTARIO_ESTOQUE  WHERE (TABLET_IMPORTOU = 'N' OR TABLET_IMPORTOU IS NULL)  AND TABLET_IMPORTAR ='S'`;
-
-        //const sql = `SELECT FIRST 10 * FROM INVENTARIO_ESTOQUE`
-
 
         const rows = await queryFirebird(sql, []);
 
@@ -41,7 +38,7 @@ class CapturaComposicaoService {
             const datas = {
                 id: Number(row.ID_INVENTARIO),
                 data: row.DATA,
-                status: 'Aberto',
+                status: 1,
             }
 
             try {
@@ -51,16 +48,15 @@ class CapturaComposicaoService {
                 console.log("-------------CABEÇALHO FIM------------------")
                 await this.buscarProdutosPorOps(row.ID_INVENTARIO);
 
-                /*  const create = container.resolve(CreateCabSeparacaoService);
+                 const create = container.resolve(CreateCabInventarioService);
                  const data = await create.executeMaxibom(datas);
-                 console.log(data);
- 
+                 
                  if (data) {
                      await this.buscarProdutosPorOps(row.ID_PRODUCAO);
- 
-                     await this.updateOPImportou(row.ID_PRODUCAO);
- 
-                 } */
+
+                     await this.updateInventarioImportou(row.ID_PRODUCAO);
+
+                 }
 
             } catch (e) {
                 console.error("Ocorreu um erro ao inserir op: " + row.ID_PRODUCAO);
@@ -93,17 +89,13 @@ class CapturaComposicaoService {
             */
 
 
-        console.log("Itens: [....]")
-        console.log(rows)
-
         for (const row of rows) {
 
 
             const datas = {
+                id: Number(row.ID_INVENTARIO_ITENS),
                 idCabInvent: Number(row.ID_INVENTARIO),
-                idItem: Number(row.ID_INVENTARIO_ITENS),
-                idprod: row.COD_PRO,
-                codprod: row.DESC_PRO,
+                idprod: Number(row.COD_PRO),
                 descricaoprod: row.DESC_PRO,
                 quantidade: row.QUANT,
                 local: row.LOCAL_ARMAZENAGEM,
@@ -113,23 +105,15 @@ class CapturaComposicaoService {
                 unidade: row.SIMB_UND,
             }
 
-
-
-
             try {
 
                 console.log("-------------ITENS INICIO------------------")
                 console.log(datas)
                 console.log("-------------ITENS FIM------------------")
 
-                /*  const create = container.resolve(CreateItensSeparacaoService);
-                 const data = await create.execute(datas);
-                 console.log(data);
- 
-                 if (data) {
-                     this.buscarProdutosPorOps(row.ID_PRODUCAO);
-                 } */
-
+                const create = container.resolve(CreateItensInventarioService);
+                await create.execute(datas);
+               
             } catch (e) {
                 console.error("Ocorreu um erro ao inserir inventário: " + row.ID_INVENTARIO);
             }
@@ -138,18 +122,17 @@ class CapturaComposicaoService {
 
     }
 
-    async updateOPImportou(id) {
+    async updateInventarioImportou(id) {
 
 
         try {
-            const sql = `UPDATE SOLICITACAO_PRODUCAO SET TABLET_IMPORTOU = 'S' WHERE ID_PRODUCAO = ?`;
+            const sql = `UPDATE INVENTARIO_ESTOQUE SET TABLET_IMPORTOU = 'S' WHERE ID_PRODUCAO = ?`;
             const rows = await queryFirebird(sql, [id]);
             console.log(rows)
         } catch (error) {
 
-            console.error("Ocorreu um erro ao realizar o Update na importação da OP: " + error)
+            console.error("Ocorreu um erro ao realizar o Update na importação do inventário: " + error)
         }
-
 
     }
 
