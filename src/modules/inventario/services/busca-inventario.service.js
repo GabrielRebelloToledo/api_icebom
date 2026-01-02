@@ -13,10 +13,29 @@ class CapturaComposicaoService {
        // const sql = `SELECT * FROM INVENTARIO_ESTOQUE  WHERE TABLET_IMPORTOU = 'N' AND TABLET_IMPORTAR ='S'`;
 
        const sql = `SELECT FIRST 10 *
-                    FROM INVENTARIO_ITENS_ESTOQUE`
+                    FROM INVENTARIO_ESTOQUE`
 
 
         const rows = await queryFirebird(sql, []);
+
+
+
+        /* INVENTARIO_ITENS_ESTOQUE
+        {
+            ID_INVENTARIO_ITENS: 1,
+            ID_INVENTARIO: 1,
+            COD_PRO: '0010',
+            DESC_PRO: 'LOSLOS - DEXTROSE',
+            QUANT: null,
+            LOCAL_ARMAZENAGEM: null,
+            ESTOQUE: 0,
+            DIFERENCA: null,
+            TIPO_ITEM: 'M',
+            SIMB_UND: 'QUILO',
+            VLR_CUSTO: null,
+            VLR_CUSTO2: 0
+        } 
+            */
 
 
         console.log("Cheguei aqui! Inventario")
