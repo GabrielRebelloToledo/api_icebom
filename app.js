@@ -84,7 +84,7 @@ app.use('/statussep', statusSeparacaoRoutes);
 app.use('/importarOpsSeparacao', separacaoImportarRoutes)
 
 app.use('/importarInventario', inventarioImportarRoutes)
-app.use('/importarInventario', inventarioCabRoutes)
+app.use('/inventario-cab', inventarioCabRoutes)
 app.use('/inventario-itens', inventarioItensRoutes)
 
 app.use('/statusinvetario', statusInventarioRoutes)
