@@ -58,7 +58,7 @@ class CapturaComposicaoService {
                  }
 
             } catch (e) {
-                console.error("Ocorreu um erro ao inserir op: " + row.ID_INVENTARIO);
+                console.error("Ocorreu um erro ao inserir cabeçalho do inventário: " + row.ID_INVENTARIO + "....Erro: " + e);
             }
         }
 
@@ -114,7 +114,7 @@ class CapturaComposicaoService {
                 await create.execute(datas);
                
             } catch (e) {
-                console.error("Ocorreu um erro ao inserir inventário: " + row.ID_INVENTARIO);
+                console.error("Ocorreu um erro ao inserir inventário: " + row.ID_INVENTARIO + "....Erro: " + e);
             }
         }
 
