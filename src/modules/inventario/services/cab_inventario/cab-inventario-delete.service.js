@@ -5,8 +5,7 @@ import ItensInventario from '../../../../entities/itens_inventario.entities.js';
 class DeleteCabInventarioService {
     constructor() {
         this.Repository = AppDataSource.getRepository(CabInventario);
-        this.Repository = AppDataSource.getRepository(ItensInventario);
-
+        this.RepositoryItens = AppDataSource.getRepository(ItensInventario);
 
     }
     async execute(id) {
@@ -14,6 +13,8 @@ class DeleteCabInventarioService {
         try {
 
             const product = await this.Repository.findOne({ where: { id: id } });
+
+            console.log(product)
 
             const productDelete = await this.Repository.remove(product);
 
@@ -32,7 +33,7 @@ class DeleteCabInventarioService {
 
     async deleteItens(id) {
         try {
-           const itens = await this.Repository.createQueryBuilder()
+           const itens = await this.RepositoryItens.createQueryBuilder()
                 .delete()
                 .from('itens_inventario')
                 .where('idCabInvent = :id', { id })
